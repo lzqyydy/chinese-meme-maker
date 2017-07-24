@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>aji</title>
+</head>
+<body>
+  <div id="app">
+    <div class="section" id="output">
+      <div class="wrapper">
+        <canvas id="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+      </div>
+    </div>
+    <div class="section" id="input">
+      <div class="wrapper">
+        <image-part name="head" :data="head[0]" :elements="elements.heads" @changed="update"></image-part>
+        <image-part name="face" :data="face[0]" :elements="elements.faces" @changed="update"></image-part>
+        <div><button @click="addBody">添加bodies</button></div>
+        <image-part v-for="(body, i) in bodies" :name="'body'+i" :key="'body'+i" :data="bodies[i]" :elements="elements.bodies" @changed="update"></image-part>
+        <div><button @click="addAccessories">添加accessories</button></div>
+        <image-part v-for="(body, i) in accessories" :name="'accessory'+i" :key="'accessory'+i" :data="accessories[i]" :elements="elements.accessories" @changed="update"></image-part>
+        <div><button @click="addLine">添加line</button></div>
+        <text-line v-for="(line, i) in lines" :name="'line'+i" :key="'line'+i" :data="lines[i]" @changed="update"></text-line>
+      </div>
+    </div>
+  </div>
+  <script src='js/vue.js'></script>
+  <script src='js/main.min.js'></script>
+</body>
+</html>

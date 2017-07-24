@@ -1,13 +1,20 @@
 // Rollup plugins
-import postcss from 'rollup-plugin-postcss';
-mport replace from 'rollup-plugin-replace';
+import babel from 'rollup-plugin-babel';
+import resolve from 'rollup-plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
+import postcss from 'rollup-plugin-postcss';
 
 // PostCSS plugins
 import cssnano from 'cssnano';
+import stylus from 'stylus';
 
 // PostCSS pre-processor
 const preprocessor = (content, id) => new Promise((resolve, reject) => {
+  const renderer = stylus(content, {
+    filename: id,
+    sourcemap: {inline: true}
+  });
   renderer.render((err, code) => {
     if (err) {
       return reject(err);
@@ -17,8 +24,8 @@ const preprocessor = (content, id) => new Promise((resolve, reject) => {
 });
 
 export default {
-  entry: 'src/main.js',
-  dest: 'bundle.js',
+  entry: 'src/scripts/main.js',
+  dest: 'build/js/main.min.js',
   format: 'iife',
   sourceMap: 'inline',
   plugins: [
@@ -27,6 +34,15 @@ export default {
         cssnano()
       ],
       preprocessor,
+      extensions: [ '.styl', '.css' ],
+    }),
+    resolve({
+      jsnext: true,
+      main: true,
+      browser: true,
+    }),
+    babel({
+      exclude: 'node_modules/**',
     }),
     replace({
       exclude: 'node_modules/**',
