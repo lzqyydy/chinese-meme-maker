@@ -1,0 +1,24 @@
+{
+  "name": "rollup-template-self",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^3.10.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-postcss": "^0.4.1",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^3.2.2"
+  },
+  "dependencies": {
+    "debug": "^2.6.3"
+  }
+}
