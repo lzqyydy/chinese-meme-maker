@@ -1,6 +1,9 @@
 import '../styles/main.css'
 
-import { drawImage, drawMirrorImage, fillText, fillMirrorText } from './drawMethods.js'
+
+import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as Accessory, TextPart as Line } from './model.js'
+import draw from './draw.js'
+import { el_heads, el_faces, el_bodies, el_accessories } from './data.js';
 
 Vue.component('image-part', {
   template: '<div class="part" :id="name" @mousedown="onPartSelected">\
@@ -94,38 +97,11 @@ var app = new Vue({
       bodies: [],
       accessories: []
     },
-
-    head: [{
-      selection: null,
-      params: {
-        width: 0,
-        height: 0,
-        x: 0,
-        y: 0,
-        mirror: false
-      }
-    }],
-    face: [{
-      selection: null,
-      params: {
-        width: 0,
-        height: 0,
-        x: 0,
-        y: 0,
-        mirror: false
-      }
-    }],
+    head: [new Head()],
+    face: [new Face()],
     bodies: [],
     accessories: [],
-    lines: [{
-      context: '',
-      params: {
-        size: 20,
-        x: 200,
-        y: 0,
-        mirror: false
-      }
-    }]
+    lines: [new Line()]
   },
   methods: {
     update: function(type, data){
@@ -198,158 +174,20 @@ var app = new Vue({
         return;
       }
     },
-    redraw: function(){
-      var canvas = document.querySelector('#canvas');
-      var ctx = canvas.getContext('2d');
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      if(this.head[0]&&this.head[0].selection!==null){
-        if(!this.head[0].params.mirror){
-          drawImage(ctx, document.querySelector('#head').querySelectorAll('.element')[this.head[0].selection],
-                        this.head[0].params.x,
-                        this.head[0].params.y,
-                        this.head[0].params.width,
-                        this.head[0].params.height)
-        }
-        else{
-          drawMirrorImage(ctx, document.querySelector('#head').querySelectorAll('.element')[this.head[0].selection],
-                        this.head[0].params.x,
-                        this.head[0].params.y,
-                        this.head[0].params.width,
-                        this.head[0].params.height)
-        }
-      }
-      if(this.face[0]&&this.face[0].selection!==null){
-        if(!this.face[0].params.mirror){
-          drawImage(ctx, document.querySelector('#face').querySelectorAll('.element')[this.face[0].selection],
-                        this.face[0].params.x,
-                        this.face[0].params.y,
-                        this.face[0].params.width,
-                        this.face[0].params.height)
-        }
-        else{
-          drawMirrorImage(ctx, document.querySelector('#face').querySelectorAll('.element')[this.face[0].selection],
-                        this.face[0].params.x,
-                        this.face[0].params.y,
-                        this.face[0].params.width,
-                        this.face[0].params.height)
-        }
-      }
-      for(var i=0;i<this.bodies.length;i++){
-        if(this.bodies[i].selection!==null){
-          if(!this.bodies[i].params.mirror){
-            drawImage(ctx, document.querySelector('#body'+i).querySelectorAll('.element')[this.bodies[i].selection],
-                        this.bodies[i].params.x,
-                        this.bodies[i].params.y,
-                        this.bodies[i].params.width,
-                        this.bodies[i].params.height)
-          }
-          else{
-            drawMirrorImage(ctx, document.querySelector('#body'+i).querySelectorAll('.element')[this.bodies[i].selection],
-                        this.bodies[i].params.x,
-                        this.bodies[i].params.y,
-                        this.bodies[i].params.width,
-                        this.bodies[i].params.height)
-          }
-        }
-      }
-
-      for(var i=0;i<this.accessories.length;i++){
-        if(this.accessories[i].selection!==null){
-          if(!this.accessories[i].params.mirror){
-            drawImage(ctx, document.querySelector('#accessory'+i).querySelectorAll('.element')[this.accessories[i].selection],
-                        this.accessories[i].params.x,
-                        this.accessories[i].params.y,
-                        this.accessories[i].params.width,
-                        this.accessories[i].params.height)
-          }
-          else{
-            drawMirrorImage(ctx, document.querySelector('#accessory'+i).querySelectorAll('.element')[this.accessories[i].selection],
-                        this.accessories[i].params.x,
-                        this.accessories[i].params.y,
-                        this.accessories[i].params.width,
-                        this.accessories[i].params.height)
-          }
-        }
-      }
-
-      for(var i=0;i<this.lines.length;i++){
-        if(this.lines[i].context!==''){
-          ctx.font=this.lines[i].params.size+"px Georgia";
-          ctx.textAlign="center"; 
-          ctx.textBaseline="middle"; 
-          if(!this.lines[i].params.mirror){
-            fillText(ctx, this.lines[i].context,this.lines[i].params.x,parseInt(this.lines[i].params.y)+parseInt(this.lines[i].params.size)); 
-          }
-          else{
-            fillMirrorText(ctx, this.lines[i].context,this.lines[i].params.x,parseInt(this.lines[i].params.y)+parseInt(this.lines[i].params.size)); 
-          }
-        }
-      }
-    }
+    redraw: draw
   },
   created: function(){
-    this.lines[0].context = '妙！';
-    this.lines[0].params.size = 20;
-    this.lines[0].params.x = 200;
-    this.lines[0].params.y = 200;
-
-    var heads=[{
-      src: 'resources/heads/0000.png',
-      width: 150,
-      height: 150,
-      x: 125,
-      y: 70,
-      mirror: false
-    }];
-    var faces=[{
-      src: 'resources/faces/0000.png',
-      width: 60,
-      height: 70,
-      x: 170,
-      y: 87,
-      mirror: false
-    },{
-      src: 'resources/faces/0001.png',
-      width: 71,
-      height: 64,
-      x: 165,
-      y: 99,
-      mirror: false
-    }];
-    var bodies=[{
-      src: 'resources/bodies/0000.png',
-      width: 210,
-      height: 92,
-      x: 125,
-      y: 105,
-      mirror: false
-    },{
-      src: 'resources/bodies/0001.png',
-      width: 64,
-      height: 122,
-      x: 269,
-      y: 74,
-      mirror: false
-    }];
-    var accessories=[{
-      src: 'resources/accessories/hat.png',
-      width: 71,
-      height: 64,
-      x: 165,
-      y: 99,
-      mirror: false
-    }]
-    for(var i=0;i<heads.length;i++){
-      this.elements.heads.push(heads[i])
+    for(var i=0;i<el_heads.length;i++){
+      this.elements.heads.push(el_heads[i])
     }
-    for(var i=0;i<faces.length;i++){
-      this.elements.faces.push(faces[i])
+    for(var i=0;i<el_faces.length;i++){
+      this.elements.faces.push(el_faces[i])
     }
-    for(var i=0;i<bodies.length;i++){
-      this.elements.bodies.push(bodies[i])
+    for(var i=0;i<el_bodies.length;i++){
+      this.elements.bodies.push(el_bodies[i])
     }
-    for(var i=0;i<accessories.length;i++){
-      this.elements.accessories.push(accessories[i])
+    for(var i=0;i<el_accessories.length;i++){
+      this.elements.accessories.push(el_accessories[i])
     }
   }
 })
