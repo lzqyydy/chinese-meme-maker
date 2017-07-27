@@ -294,7 +294,7 @@ var app = new Vue({
     this.lines[0].params.y = 200;
 
     var heads=[{
-      src: 'resources/yashi/heads/0000.png',
+      src: 'resources/heads/0000.png',
       width: 150,
       height: 150,
       x: 125,
@@ -302,14 +302,14 @@ var app = new Vue({
       mirror: false
     }];
     var faces=[{
-      src: 'resources/yashi/faces/0000.png',
+      src: 'resources/faces/0000.png',
       width: 60,
       height: 70,
       x: 170,
       y: 87,
       mirror: false
     },{
-      src: 'resources/yashi/faces/0001.png',
+      src: 'resources/faces/0001.png',
       width: 71,
       height: 64,
       x: 165,
@@ -317,14 +317,14 @@ var app = new Vue({
       mirror: false
     }];
     var bodies=[{
-      src: 'resources/yashi/bodies/0000.png',
+      src: 'resources/bodies/0000.png',
       width: 210,
       height: 92,
       x: 125,
       y: 105,
       mirror: false
     },{
-      src: 'resources/yashi/bodies/0001.png',
+      src: 'resources/bodies/0001.png',
       width: 64,
       height: 122,
       x: 269,
@@ -332,7 +332,7 @@ var app = new Vue({
       mirror: false
     }];
     var accessories=[{
-      src: 'resources/yashi/accessories/hat.png',
+      src: 'resources/accessories/hat.png',
       width: 71,
       height: 64,
       x: 165,
