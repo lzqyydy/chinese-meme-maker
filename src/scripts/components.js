@@ -1,7 +1,7 @@
 import { ImagePart, TextPart } from './model.js'
 
 Vue.component('image-part', {
-  template: '<div class="part" :id="name" @mousedown="onPartSelected">\
+  template: '<div class="part" :id="name" @mousedown="onPartSelected" tabindex="0" @keydown="onkeydown">\
               <div>\
                 <span class="title">{{name}}:</span>\
                 <div>\
@@ -27,14 +27,124 @@ Vue.component('image-part', {
     }
   },
   watch: {
-    data: {
-      handler: function(newValue, oldValue){
-        this.$emit('changed', this.name, newValue);
-      },
-      deep: true
-    }
+    'data.params.width': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.width = o;
+      }
+    },
+    'data.params.height': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.height = o;
+      }
+    },
+    'data.params.x': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.x = o;
+      }
+    },
+    'data.params.y': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.y = o;
+      }
+    },
+    'data.params.mirror': function(n, o){}
   },
   methods: {
+    onkeydown: function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey){
+        e.preventDefault();
+      }
+      if(e.key==='ArrowLeft'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.width -= 10;
+          }
+          else{
+            this.data.params.width--;
+          }
+          if(this.data.params.width < 0){
+            this.data.params.width = 0;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.x -= 10;
+          }
+          else{
+            this.data.params.x--;
+          }
+        }
+      }
+      if(e.key==='ArrowRight'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.width += 10;
+          }
+          else{
+            this.data.params.width++;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.x += 10;
+          }
+          else{
+            this.data.params.x++;
+          }
+        }
+      }
+      if(e.key==='ArrowUp'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.height -= 10;
+          }
+          else{
+            this.data.params.height--;
+          }
+          if(this.data.params.height < 0){
+            this.data.params.height = 0;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.y -= 10;
+          }
+          else{
+            this.data.params.y--;
+          }
+        }
+      }
+      if(e.key==='ArrowDown'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.height += 10;
+          }
+          else{
+            this.data.params.height++;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.y += 10;
+          }
+          else{
+            this.data.params.y++;
+          }
+        }
+      }
+    },
     onclick: function(e){
       this.data.selection = e.target.dataset.index;
       this.data.params.width = this.elements[e.target.dataset.index].width;
@@ -46,15 +156,13 @@ Vue.component('image-part', {
       // console.log(JSON.parse(JSON.stringify(this.data)));
     },
     onPartSelected: function(e){
-      // console.log(JSON.parse(JSON.stringify(this.data)));
     }
   },
   created: function(){
-    // console.log(JSON.parse(JSON.stringify(this.data)));
   }
 });
 Vue.component('text-part', {
-  template: '<div class="part" :id="name" @mousedown="onPartSelected">\
+  template: '<div class="part" :id="name" @mousedown="onPartSelected" tabindex="0" @keydown="onkeydown">\
               <div>\
                 <span class="title">{{name}}:</span><input type="text" v-model="data.context">\
               </div>\
@@ -76,14 +184,116 @@ Vue.component('text-part', {
     }
   },
   watch: {
-    data: {
-      handler: function(newValue, oldValue){
-        this.$emit('changed', this.name, newValue);
-      },
-      deep: true
-    }
+    'data.params.size': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.width = o;
+      }
+    },
+    'data.params.x': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.x = o;
+      }
+    },
+    'data.params.y': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.y = o;
+      }
+    },
+    'data.params.mirror': function(n, o){}
   },
   methods: {
+    onkeydown: function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey){
+        e.preventDefault();
+      }
+      if(e.key==='ArrowLeft'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.size -= 10;
+          }
+          else{
+            this.data.params.size--;
+          }
+          if(this.data.params.size < 0){
+            this.data.params.size = 0;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.x -= 10;
+          }
+          else{
+            this.data.params.x--;
+          }
+        }
+      }
+      if(e.key==='ArrowRight'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.size += 10;
+          }
+          else{
+            this.data.params.size++;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.x += 10;
+          }
+          else{
+            this.data.params.x++;
+          }
+        }
+      }
+      if(e.key==='ArrowUp'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.size -= 10;
+          }
+          else{
+            this.data.params.size--;
+          }
+          if(this.data.params.size < 0){
+            this.data.params.size = 0;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.y -= 10;
+          }
+          else{
+            this.data.params.y--;
+          }
+        }
+      }
+      if(e.key==='ArrowDown'){
+        if(e.metaKey||e.ctrlKey){
+          if(e.shiftKey){
+            this.data.params.size += 10;
+          }
+          else{
+            this.data.params.size++;
+          }
+        }
+        else{
+          if(e.shiftKey){
+            this.data.params.y += 10;
+          }
+          else{
+            this.data.params.y++;
+          }
+        }
+      }
+    },
     onPartSelected: function(e){
       // console.log(JSON.parse(JSON.stringify(this.data)));
     }
