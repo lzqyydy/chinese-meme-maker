@@ -1,7 +1,7 @@
 import { ImagePart, TextPart } from './model.js'
 
 Vue.component('image-part', {
-  template: '<div class="part" :id="name" @mousedown="onPartSelected" tabindex="0" @keydown="onkeydown">\
+  template: '<div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">\
               <div>\
                 <span class="title">{{name}}:</span>\
                 <div>\
@@ -145,6 +145,19 @@ Vue.component('image-part', {
         }
       }
     },
+    ondrag: function(dx, dy, mods){
+      if(this.data.selection!==null){
+        // console.log(this.name, dx, dy, mods)
+        if(mods.ctrlKey||mods.metaKey){
+          this.data.params.width += dx;
+          this.data.params.height += dy;
+        }
+        else{
+          this.data.params.x += dx;
+          this.data.params.y += dy;
+        }
+      }
+    },
     onclick: function(e){
       this.data.selection = e.target.dataset.index;
       this.data.params.width = this.elements[e.target.dataset.index].width;
@@ -156,6 +169,8 @@ Vue.component('image-part', {
       // console.log(JSON.parse(JSON.stringify(this.data)));
     },
     onPartSelected: function(e){
+      // console.log('focused')
+      this.$emit('focused', this.name);
     }
   },
   created: function(){
@@ -292,6 +307,12 @@ Vue.component('text-part', {
             this.data.params.y++;
           }
         }
+      }
+    },
+    ondrag: function(dx, dy, mods){
+      if(this.data.context!==null){
+        this.data.params.x += dx;
+        this.data.params.y += dy;
       }
     },
     onPartSelected: function(e){

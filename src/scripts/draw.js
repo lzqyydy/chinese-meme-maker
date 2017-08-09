@@ -1,19 +1,19 @@
 import { drawImage, drawMirrorImage, fillText, fillMirrorText } from './drawMethods.js'
 
 export default function draw(){
-  var canvas = document.querySelector('#canvas');
+  var canvas = document.querySelector('#result');
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
   if(this.head[0]&&this.head[0].selection!==null){
     if(!this.head[0].params.mirror){
-      drawImage(ctx, document.querySelector('#head').querySelectorAll('.element')[this.head[0].selection],
+      drawImage(ctx, document.querySelector('#head0').querySelectorAll('.element')[this.head[0].selection],
                     this.head[0].params.x,
                     this.head[0].params.y,
                     this.head[0].params.width,
                     this.head[0].params.height)
     }
     else{
-      drawMirrorImage(ctx, document.querySelector('#head').querySelectorAll('.element')[this.head[0].selection],
+      drawMirrorImage(ctx, document.querySelector('#head0').querySelectorAll('.element')[this.head[0].selection],
                     this.head[0].params.x,
                     this.head[0].params.y,
                     this.head[0].params.width,
@@ -22,14 +22,14 @@ export default function draw(){
   }
   if(this.face[0]&&this.face[0].selection!==null){
     if(!this.face[0].params.mirror){
-      drawImage(ctx, document.querySelector('#face').querySelectorAll('.element')[this.face[0].selection],
+      drawImage(ctx, document.querySelector('#face0').querySelectorAll('.element')[this.face[0].selection],
                     this.face[0].params.x,
                     this.face[0].params.y,
                     this.face[0].params.width,
                     this.face[0].params.height)
     }
     else{
-      drawMirrorImage(ctx, document.querySelector('#face').querySelectorAll('.element')[this.face[0].selection],
+      drawMirrorImage(ctx, document.querySelector('#face0').querySelectorAll('.element')[this.face[0].selection],
                     this.face[0].params.x,
                     this.face[0].params.y,
                     this.face[0].params.width,

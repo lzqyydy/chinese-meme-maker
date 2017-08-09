@@ -8,19 +8,19 @@
   <div id="app">
     <div class="section" id="output">
       <div class="wrapper">
-        <canvas id="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+        <canvas id="result" :width="canvasWidth" :height="canvasHeight"></canvas>
       </div>
     </div>
     <div class="section" id="input">
       <div class="wrapper">
-        <image-part name="head" :elements="elements.heads" @changed="update"></image-part>
-        <image-part name="face" :elements="elements.faces" @changed="update"></image-part>
+        <image-part name="head0" :ref="'head0'" :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
+        <image-part name="face0" :ref="'face0'" :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
         <div><button @click="addBody">添加bodies</button></div>
-        <image-part v-for="(body, i) in bodies" :name="'body'+i" :key="'body'+i" :elements="elements.bodies" @changed="update"></image-part>
+        <image-part v-for="(body, i) in bodies" :name="'body'+i" :key="'body'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
         <div><button @click="addAccessories">添加accessories</button></div>
-        <image-part v-for="(accessory, i) in accessories" :name="'accessory'+i" :key="'accessory'+i" :elements="elements.accessories" @changed="update"></image-part>
+        <image-part v-for="(accessory, i) in accessories" :name="'accessory'+i" :key="'accessory'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
         <div><button @click="addLine">添加line</button></div>
-        <text-part v-for="(line, i) in lines" :name="'line'+i" :key="'line'+i" :data="lines[i]" @changed="update"></text-part>
+        <text-part v-for="(line, i) in lines" :name="'line'+i" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
       </div>
     </div>
   </div>

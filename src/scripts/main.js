@@ -1,13 +1,15 @@
-import '../styles/main.css'
+import '../styles/main.css';
 
-
-import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as Accessory, TextPart as Line } from './model.js'
-import draw from './draw.js'
+import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as Accessory, TextPart as Line } from './model.js';
+import redraw from './draw.js';
 import { el_heads, el_faces, el_bodies, el_accessories } from './data.js';
-import './components.js'
+import './components.js';
+
+import { swipeMixin } from './mixins.js';
 
 var app = new Vue({
   el: '#app',
+  mixins: [swipeMixin],
   data: {
     canvasWidth: 400,
     canvasHeight: 300,
@@ -21,29 +23,33 @@ var app = new Vue({
     face: [new Face()],
     bodies: [],
     accessories: [],
-    lines: [new Line()]
+    lines: [new Line()],
+    activePart: null
   },
   methods: {
-    update: function(type, data){
-      if(type.startsWith('head')){
+    updateData: function(name, data){
+      if(name.startsWith('head')){
         Vue.set(this.head, 0, data)
       }
-      if(type.startsWith('face')){
+      if(name.startsWith('face')){
         Vue.set(this.face, 0, data)
       }
-      if(type.startsWith('bod')){
-        var target = parseInt(type.slice('body'.length));
+      if(name.startsWith('bod')){
+        var target = parseInt(name.slice('body'.length));
         Vue.set(this.bodies, target, data)
       }
-      if(type.startsWith('acc')){
-        var target = parseInt(type.slice('accessory'.length));
+      if(name.startsWith('acc')){
+        var target = parseInt(name.slice('accessory'.length));
         Vue.set(this.accessories, target, data)
       }
-      if(type.startsWith('line')){
-        var target = parseInt(type.slice(4));
+      if(name.startsWith('line')){
+        var target = parseInt(name.slice(4));
         Vue.set(this.lines, target, data)
       }
       this.redraw();
+    },
+    updateTarget: function(name){
+      this.activePart = name;
     },
     addBody: function(){
       if(this.bodies.length<=3){
@@ -69,7 +75,7 @@ var app = new Vue({
         return;
       }
     },
-    redraw: draw
+    redraw: redraw
   },
   created: function(){
     for(var i=0;i<el_heads.length;i++){
