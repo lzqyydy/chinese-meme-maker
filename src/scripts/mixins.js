@@ -3,19 +3,19 @@ import swipe from './swipe.js'
 var swipeMixin = {
 	methods: {
     swipeHandler: function(op, text){
-      console.log('op', op, 'text', text);
+      // console.log('op', op, 'text', text);
     },
     moveHandler: function(dx, dy, mods){
-      this.activePart&&this.$refs[this.activePart].ondrag(dx, dy, mods);
+      this.activePart&&this.$refs[this.activePart.slice(0,-1)][this.activePart.slice(-1)].ondrag(dx, dy, mods);
     },
     touchHandler: function(){
-      console.log('touched');
+      // console.log('touched');
     },
     endHandler: function(){
-      console.log('ended');
+      // console.log('ended');
     },
     tapHandler: function(){
-      console.log('tapped');
+      // console.log('tapped');
     }
   },
   mounted: function(){

@@ -90,7 +90,7 @@ Vue.component('image-part', {
       if(e.key==='ArrowRight'){
         if(e.metaKey||e.ctrlKey){
           if(e.shiftKey){
-            this.data.params.width += 10;
+            this.data.params.width -= -10;
           }
           else{
             this.data.params.width++;
@@ -98,7 +98,7 @@ Vue.component('image-part', {
         }
         else{
           if(e.shiftKey){
-            this.data.params.x += 10;
+            this.data.params.x -= -10;
           }
           else{
             this.data.params.x++;
@@ -129,7 +129,7 @@ Vue.component('image-part', {
       if(e.key==='ArrowDown'){
         if(e.metaKey||e.ctrlKey){
           if(e.shiftKey){
-            this.data.params.height += 10;
+            this.data.params.height -= -10;
           }
           else{
             this.data.params.height++;
@@ -147,14 +147,13 @@ Vue.component('image-part', {
     },
     ondrag: function(dx, dy, mods){
       if(this.data.selection!==null){
-        // console.log(this.name, dx, dy, mods)
         if(mods.ctrlKey||mods.metaKey){
-          this.data.params.width += dx;
-          this.data.params.height += dy;
+          this.data.params.width -= -dx;
+          this.data.params.height -= -dy;
         }
         else{
-          this.data.params.x += dx;
-          this.data.params.y += dy;
+          this.data.params.x -= -dx;
+          this.data.params.y -= -dy;
         }
       }
     },
@@ -177,7 +176,7 @@ Vue.component('image-part', {
   }
 });
 Vue.component('text-part', {
-  template: '<div class="part" :id="name" @mousedown="onPartSelected" tabindex="0" @keydown="onkeydown">\
+  template: '<div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">\
               <div>\
                 <span class="title">{{name}}:</span><input type="text" v-model="data.context">\
               </div>\
@@ -311,12 +310,19 @@ Vue.component('text-part', {
     },
     ondrag: function(dx, dy, mods){
       if(this.data.context!==null){
-        this.data.params.x += dx;
-        this.data.params.y += dy;
+        if(mods.ctrlKey||mods.metaKey){
+          this.data.params.size -= -dx;
+          this.data.params.size -= -dy;
+        }
+        else{
+          this.data.params.x -= -dx;
+          this.data.params.y -= -dy;
+        }
       }
     },
     onPartSelected: function(e){
       // console.log(JSON.parse(JSON.stringify(this.data)));
+      this.$emit('focused', this.name);
     }
   }
 });

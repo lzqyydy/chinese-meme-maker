@@ -19,8 +19,8 @@ var app = new Vue({
       bodies: [],
       accessories: []
     },
-    head: [new Head()],
-    face: [new Face()],
+    heads: [new Head()],
+    faces: [new Face()],
     bodies: [],
     accessories: [],
     lines: [new Line()],
@@ -29,10 +29,10 @@ var app = new Vue({
   methods: {
     updateData: function(name, data){
       if(name.startsWith('head')){
-        Vue.set(this.head, 0, data)
+        Vue.set(this.heads, 0, data)
       }
       if(name.startsWith('face')){
-        Vue.set(this.face, 0, data)
+        Vue.set(this.faces, 0, data)
       }
       if(name.startsWith('bod')){
         var target = parseInt(name.slice('body'.length));

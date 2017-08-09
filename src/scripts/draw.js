@@ -4,36 +4,40 @@ export default function draw(){
   var canvas = document.querySelector('#result');
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(this.head[0]&&this.head[0].selection!==null){
-    if(!this.head[0].params.mirror){
-      drawImage(ctx, document.querySelector('#head0').querySelectorAll('.element')[this.head[0].selection],
-                    this.head[0].params.x,
-                    this.head[0].params.y,
-                    this.head[0].params.width,
-                    this.head[0].params.height)
-    }
-    else{
-      drawMirrorImage(ctx, document.querySelector('#head0').querySelectorAll('.element')[this.head[0].selection],
-                    this.head[0].params.x,
-                    this.head[0].params.y,
-                    this.head[0].params.width,
-                    this.head[0].params.height)
+  for(var i=0;i<this.heads.length;i++){
+    if(this.heads[0]&&this.heads[0].selection!==null){
+      if(!this.heads[0].params.mirror){
+        drawImage(ctx, document.querySelector('#head'+i).querySelectorAll('.element')[this.heads[0].selection],
+                      this.heads[0].params.x,
+                      this.heads[0].params.y,
+                      this.heads[0].params.width,
+                      this.heads[0].params.height)
+      }
+      else{
+        drawMirrorImage(ctx, document.querySelector('#head'+i).querySelectorAll('.element')[this.heads[0].selection],
+                      this.heads[0].params.x,
+                      this.heads[0].params.y,
+                      this.heads[0].params.width,
+                      this.heads[0].params.height)
+      }
     }
   }
-  if(this.face[0]&&this.face[0].selection!==null){
-    if(!this.face[0].params.mirror){
-      drawImage(ctx, document.querySelector('#face0').querySelectorAll('.element')[this.face[0].selection],
-                    this.face[0].params.x,
-                    this.face[0].params.y,
-                    this.face[0].params.width,
-                    this.face[0].params.height)
-    }
-    else{
-      drawMirrorImage(ctx, document.querySelector('#face0').querySelectorAll('.element')[this.face[0].selection],
-                    this.face[0].params.x,
-                    this.face[0].params.y,
-                    this.face[0].params.width,
-                    this.face[0].params.height)
+  for(var i=0;i<this.faces.length;i++){
+    if(this.faces[0]&&this.faces[0].selection!==null){
+      if(!this.faces[0].params.mirror){
+        drawImage(ctx, document.querySelector('#face'+i).querySelectorAll('.element')[this.faces[0].selection],
+                      this.faces[0].params.x,
+                      this.faces[0].params.y,
+                      this.faces[0].params.width,
+                      this.faces[0].params.height)
+      }
+      else{
+        drawMirrorImage(ctx, document.querySelector('#face'+i).querySelectorAll('.element')[this.faces[0].selection],
+                      this.faces[0].params.x,
+                      this.faces[0].params.y,
+                      this.faces[0].params.width,
+                      this.faces[0].params.height)
+      }
     }
   }
   for(var i=0;i<this.bodies.length;i++){
