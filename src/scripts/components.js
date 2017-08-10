@@ -17,6 +17,7 @@ Vue.component('image-part', {
                 <span class="desc">y:</span><input type="text" v-model="data.params.y">\
               </div>\
               <div>\
+                <span class="desc">旋转:</span><input type="text" v-model="data.params.rotation">\
                 <input type="checkbox" v-model="data.params.mirror">镜像 \
               </div>\
              </div>',
@@ -57,6 +58,14 @@ Vue.component('image-part', {
       }
       else{
         this.data.params.y = o;
+      }
+    },
+    'data.params.rotation': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.rotation = o;
       }
     },
     'data.params.mirror': function(n, o){}
@@ -188,6 +197,7 @@ Vue.component('text-part', {
                 <span class="desc">y:</span><input type="text" v-model="data.params.y">\
               </div>\
               <div>\
+                <span class="desc">旋转:</span><input type="text" v-model="data.params.rotation">\
                 <input type="checkbox" v-model="data.params.mirror">镜像 \
               </div>\
             </div>',
@@ -220,6 +230,14 @@ Vue.component('text-part', {
       }
       else{
         this.data.params.y = o;
+      }
+    },
+    'data.params.rotation': function(n, o){
+      if(!isNaN(n)){
+        this.$emit('changed', this.name, this.data);
+      }
+      else{
+        this.data.params.rotation = o;
       }
     },
     'data.params.mirror': function(n, o){}

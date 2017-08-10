@@ -1,20 +1,33 @@
-function drawImage(ctx, img, x, y, width, height){
-  ctx.drawImage(img,x-width/2,y-height/2,width,height);
-};
-function drawMirrorImage(ctx, img, x, y, width, height){
+function drawImage(ctx, img, x, y, w, h, r, m){
   ctx.save();
-  ctx.scale(-1,1);
-  ctx.drawImage(img,-x-width/2,y-height/2,width,height);
+  if(m){
+    ctx.scale(-1,1);
+    ctx.translate(-x-w/2, y+h/2);
+    ctx.rotate(r * Math.PI / 180);
+  }
+  else{
+    ctx.translate(x+w/2, y+h/2);
+    ctx.rotate(r * Math.PI / 180);
+  }
+  ctx.drawImage(img, -w/2, -h/2, w, h);
   ctx.restore();
 };
-function fillText(ctx, text, x, y){
-  ctx.fillText(text,x,y); 
-};
-function fillMirrorText(ctx, text, x, y){
+
+function fillText(ctx, text, x, y, s, r, m){
+  ctx.font = s+"px Georgia";
   ctx.save();
-  ctx.scale(-1,1);
-  ctx.fillText(text,x,y); 
+  if(m){
+    ctx.scale(-1,1);
+    ctx.translate(-x, y);
+    ctx.rotate(r * Math.PI / 180);
+  }
+  else{
+    ctx.translate(x, y);
+    ctx.rotate(r * Math.PI / 180);
+  }
+  ctx.fillText(text, 0, 0); 
   ctx.restore();
 };
+
 
 export { drawImage, drawMirrorImage, fillText, fillMirrorText }

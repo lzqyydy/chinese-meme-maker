@@ -7,6 +7,7 @@ var ImagePart = class ImagePart{
         height: data.height,
         x: data.x,
         y: data.y,
+        rotation: data.rotation,
         mirror: data.mirror
       }
     }
@@ -17,16 +18,18 @@ var ImagePart = class ImagePart{
         height: 0,
         x: 0,
         y: 0,
+        rotation: 0,
         mirror: false
       }
     }
   }
-  setParam(w, h, x, y, mir){
+  setParam(w, h, x, y, r, m){
     this.params.width = w;
     this.params.height = h;
     this.params.x = x;
     this.params.y = y;
-    this.params.mir = mir;
+    this.params.rotation = r;
+    this.params.mirror = m;
   }
 }
 
@@ -38,6 +41,7 @@ var TextPart = class TextPart{
         size: data.size,
         x: data.x,
         y: data.y,
+        rotation: data.rotation,
         mirror: data.mirror
       }
     }
@@ -47,6 +51,7 @@ var TextPart = class TextPart{
         size: 16,
         x: 0,
         y: 0,
+        rotation: 0,
         mirror: false
       }
     }
