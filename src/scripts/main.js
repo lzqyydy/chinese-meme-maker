@@ -7,6 +7,8 @@ import './components.js';
 
 import { swipeMixin } from './mixins.js';
 
+import * as C from './constants.js'
+
 var app = new Vue({
   el: '#app',
   mixins: [swipeMixin],
