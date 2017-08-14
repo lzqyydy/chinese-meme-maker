@@ -1,7 +1,7 @@
 import '../styles/main.css';
 
 import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as Accessory, TextPart as Line } from './model.js';
-import redraw from './draw.js';
+import {draw, border} from './draw.js';
 import { el_heads, el_faces, el_bodies, el_accessories } from './data.js';
 import './components.js';
 
@@ -77,7 +77,10 @@ var app = new Vue({
         return;
       }
     },
-    redraw: redraw
+    redraw: function(){
+      draw.call(this);
+      border.call(this);
+    }
   },
   created: function(){
     for(var i=0;i<el_heads.length;i++){

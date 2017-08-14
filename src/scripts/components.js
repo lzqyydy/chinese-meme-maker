@@ -68,7 +68,9 @@ Vue.component('image-part', {
         this.data.params.rotation = o;
       }
     },
-    'data.params.mirror': function(n, o){}
+    'data.params.mirror': function(n, o){
+      this.$emit('changed', this.name, this.data);
+    }
   },
   methods: {
     onkeydown: function(e){
@@ -87,6 +89,14 @@ Vue.component('image-part', {
             this.data.params.width = 0;
           }
         }
+        else if(e.altKey){
+          if(e.shiftKey){
+            this.data.params.rotation -= 10;
+          }
+          else{
+            this.data.params.rotation--;
+          }
+        }
         else{
           if(e.shiftKey){
             this.data.params.x -= 10;
@@ -103,6 +113,14 @@ Vue.component('image-part', {
           }
           else{
             this.data.params.width++;
+          }
+        }
+        else if(e.altKey){
+          if(e.shiftKey){
+            this.data.params.rotation -= -10;
+          }
+          else{
+            this.data.params.rotation++;
           }
         }
         else{
@@ -126,6 +144,14 @@ Vue.component('image-part', {
             this.data.params.height = 0;
           }
         }
+        else if(e.altKey){
+          if(e.shiftKey){
+            this.data.params.rotation -= 10;
+          }
+          else{
+            this.data.params.rotation--;
+          }
+        }
         else{
           if(e.shiftKey){
             this.data.params.y -= 10;
@@ -142,6 +168,14 @@ Vue.component('image-part', {
           }
           else{
             this.data.params.height++;
+          }
+        }
+        else if(e.altKey){
+          if(e.shiftKey){
+            this.data.params.rotation -= -10;
+          }
+          else{
+            this.data.params.rotation++;
           }
         }
         else{
@@ -208,6 +242,9 @@ Vue.component('text-part', {
     }
   },
   watch: {
+    'data.context': function(n, o){
+      this.$emit('changed', this.name, this.data);
+    },
     'data.params.size': function(n, o){
       if(!isNaN(n)){
         this.$emit('changed', this.name, this.data);
@@ -240,7 +277,9 @@ Vue.component('text-part', {
         this.data.params.rotation = o;
       }
     },
-    'data.params.mirror': function(n, o){}
+    'data.params.mirror': function(n, o){
+      this.$emit('changed', this.name, this.data);
+    }
   },
   methods: {
     onkeydown: function(e){

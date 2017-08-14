@@ -1,6 +1,7 @@
-import { drawImage, drawMirrorImage, fillText, fillMirrorText } from './drawMethods.js'
+import { drawImage, fillText, drawBorder } from './drawMethods.js';
+import { ImagePart, TextPart } from './model.js';
 
-export default function draw(){
+var draw = function draw(){
   var canvas = document.querySelector('#result');
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -51,14 +52,84 @@ export default function draw(){
 
   for(var i=0;i<this.lines.length;i++){
     if(this.lines[i].context!==''){
-      ctx.textAlign="center"; 
-      ctx.textBaseline="middle"; 
       fillText(ctx, this.lines[i].context,
                 this.lines[i].params.x,
-                this.lines[i].params.y-(-this.lines[i].params.size),
+                this.lines[i].params.y,
                 this.lines[i].params.size,
                 this.lines[i].params.rotation,
                 this.lines[i].params.mirror); 
     }
   }
 }
+
+var borderValueCheck = function(rect, item, lineWidth){
+  if(item instanceof TextPart){
+    if(!rect.top||rect.top>item.params.y-item.params.size/2){
+      rect.top = item.params.y-item.params.size/2;
+    }
+    if(!rect.right||rect.right<item.params.x+lineWidth/2){
+      rect.right = item.params.x+lineWidth/2;
+    }
+    if(!rect.bottom||rect.bottom<item.params.y+item.params.size/2){
+      rect.bottom = item.params.y+item.params.size/2;
+    }
+    if(!rect.left||rect.left>item.params.x-lineWidth/2){
+      rect.left = item.params.x-lineWidth/2;
+    }
+  }
+  if(item instanceof ImagePart){
+    if(!rect.top||rect.top>item.params.y-item.params.height/2){
+      rect.top = item.params.y-item.params.height/2;
+    }
+    if(!rect.right||rect.right<item.params.x+item.params.width/2){
+      rect.right = item.params.x+item.params.width/2;
+    }
+    if(!rect.bottom||rect.bottom<item.params.y+item.params.height/2){
+      rect.bottom = item.params.y+item.params.height/2;
+    }
+    if(!rect.left||rect.left>item.params.x-item.params.width/2){
+      rect.left = item.params.x-item.params.width/2;
+    }
+  }
+}
+
+var border = function(padding){
+  var canvas = document.querySelector('#result');
+  var ctx = canvas.getContext('2d');
+
+  var rect = {top: null, right: null, bottom: null, left: null}
+  padding = padding || 0;
+
+  for(var i=0;i<this.heads.length;i++){
+    if(this.heads[i].selection!==null){
+      borderValueCheck(rect, this.heads[i]);
+    }
+  }
+  for(var i=0;i<this.faces.length;i++){
+    if(this.faces[i].selection!==null){
+      borderValueCheck(rect, this.faces[i]);
+    }
+  }
+  for(var i=0;i<this.bodies.length;i++){
+    if(this.bodies[i].selection!==null){
+      borderValueCheck(rect, this.bodies[i]);
+    }
+  }
+  for(var i=0;i<this.accessories.length;i++){
+    if(this.accessories[i].selection!==null){
+      borderValueCheck(rect, this.accessories[i]);
+    }
+  }
+  for(var i=0;i<this.lines.length;i++){
+    if(this.lines[i].context!==''){
+      ctx.font = this.lines[i].params.size+"px Georgia";
+      borderValueCheck(rect, this.lines[i], ctx.measureText(this.lines[i].context).width);
+    }
+  }
+
+  if(rect.top!==null){
+    drawBorder(ctx, rect.top-padding, rect.right+padding, rect.bottom+padding, rect.left-padding);
+  }
+}
+
+export { draw, border };
