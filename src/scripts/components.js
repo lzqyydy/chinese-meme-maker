@@ -9,15 +9,15 @@ Vue.component('image-part', {
                 </div>\
               </div>\
               <div>\
-                <span class="desc">width:</span><input type="text" v-model="data.params.width">\
-                <span class="desc">height:</span><input type="text" v-model="data.params.height">\
+                <span class="desc">width:</span><input type="value" v-model="data.params.width">\
+                <span class="desc">height:</span><input type="value" v-model="data.params.height">\
               </div>\
               <div>\
-                <span class="desc">x:</span><input type="text" v-model="data.params.x">\
-                <span class="desc">y:</span><input type="text" v-model="data.params.y">\
+                <span class="desc">x:</span><input type="value" v-model="data.params.x">\
+                <span class="desc">y:</span><input type="value" v-model="data.params.y">\
               </div>\
               <div>\
-                <span class="desc">旋转:</span><input type="text" v-model="data.params.rotation">\
+                <span class="desc">旋转:</span><input type="value" v-model="data.params.rotation">\
                 <input type="checkbox" v-model="data.params.mirror">镜像 \
               </div>\
              </div>',
@@ -224,14 +224,14 @@ Vue.component('text-part', {
                 <span class="title">{{name}}:</span><input type="text" v-model="data.context">\
               </div>\
               <div>\
-                <span class="desc">size:</span><input type="text" v-model="data.params.size">\
+                <span class="desc">size:</span><input type="value" v-model="data.params.size">\
               <div>\
               </div>\
-                <span class="desc">x:</span><input type="text" v-model="data.params.x">\
-                <span class="desc">y:</span><input type="text" v-model="data.params.y">\
+                <span class="desc">x:</span><input type="value" v-model="data.params.x">\
+                <span class="desc">y:</span><input type="value" v-model="data.params.y">\
               </div>\
               <div>\
-                <span class="desc">旋转:</span><input type="text" v-model="data.params.rotation">\
+                <span class="desc">旋转:</span><input type="value" v-model="data.params.rotation">\
                 <input type="checkbox" v-model="data.params.mirror">镜像 \
               </div>\
             </div>',

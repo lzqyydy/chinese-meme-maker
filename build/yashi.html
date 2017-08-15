@@ -6,12 +6,13 @@
 </head>
 <body>
   <div id="app">
-    <div class="section" id="output">
+    <div class="section" id="left">
       <div class="wrapper">
         <canvas id="result" :width="canvasWidth" :height="canvasHeight"></canvas>
+        <span>padding:</span><input type="value" >
       </div>
     </div>
-    <div class="section" id="input">
+    <div class="section" id="right">
       <div class="wrapper">
         <image-part v-for="(head, i) in heads" :name="'head'+i" :ref="'head'" :key="'head'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
         <image-part v-for="(face, i) in faces" :name="'face'+i" :ref="'face'" :key="'face'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
