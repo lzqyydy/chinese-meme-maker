@@ -1,5 +1,9 @@
 import { ImagePart, TextPart } from './model.js'
 
+import m from '../../../lib/modal.vue';
+
+Vue.component('modal', m);
+
 Vue.component('image-part', {
   template: '<div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">\
               <div>\
@@ -18,7 +22,7 @@ Vue.component('image-part', {
               </div>\
               <div>\
                 <span class="desc">旋转:</span><input type="value" v-model="data.params.rotation">\
-                <input type="checkbox" v-model="data.params.mirror">镜像 \
+                <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> \
               </div>\
              </div>',
   props: ['name','elements'],
@@ -232,7 +236,7 @@ Vue.component('text-part', {
               </div>\
               <div>\
                 <span class="desc">旋转:</span><input type="value" v-model="data.params.rotation">\
-                <input type="checkbox" v-model="data.params.mirror">镜像 \
+                <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> \
               </div>\
             </div>',
   props: ['name'],

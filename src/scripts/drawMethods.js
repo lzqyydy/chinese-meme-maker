@@ -2,18 +2,19 @@ function drawImage(ctx, img, x, y, w, h, r, m){
   ctx.save();
   if(m){
     ctx.scale(-1,1);
-    ctx.translate(-ctx.canvas.width/2-x+w/2, ctx.canvas.height/2+y+h/2);
+    ctx.translate(-ctx.canvas.width/2-x, ctx.canvas.height/2+y);
     ctx.rotate(r * Math.PI / 180);
   }
   else{
-    ctx.translate(ctx.canvas.width/2+x+w/2, ctx.canvas.height/2+y+h/2);
+    ctx.translate(ctx.canvas.width/2+x, ctx.canvas.height/2+y);
     ctx.rotate(r * Math.PI / 180);
   }
-  ctx.drawImage(img, -w, -h, w, h);
+  ctx.drawImage(img, -w/2, -h/2, w, h);
   ctx.restore();
 };
 
 function fillText(ctx, text, x, y, s, r, m){
+  ctx.fillStyle = "#000000";
   ctx.font = s+"px Georgia";
   ctx.textBaseline="middle"; 
   ctx.textAlign="center"; 

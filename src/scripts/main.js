@@ -13,8 +13,8 @@ var app = new Vue({
   el: '#app',
   mixins: [swipeMixin],
   data: {
-    canvasWidth: 400,
-    canvasHeight: 300,
+    canvasWidth: 360,
+    canvasHeight: 270,
     elements: {
       heads: [],
       faces: [],
@@ -26,7 +26,12 @@ var app = new Vue({
     bodies: [],
     accessories: [],
     lines: [new Line()],
-    activePart: null
+    activePart: null,
+    controller: {
+      padding: 25,
+      outputImg: '',
+      showOutput: false
+    }
   },
   methods: {
     updateData: function(name, data){
@@ -77,9 +82,13 @@ var app = new Vue({
         return;
       }
     },
+    output: function(){
+      this.controller.outputImg = document.querySelector('#canvas').toDataURL();
+      this.controller.showOutput = true;
+    },
     redraw: function(){
       draw.call(this);
-      border.call(this);
+      border.call(this, +this.controller.padding, false);
     }
   },
   created: function(){

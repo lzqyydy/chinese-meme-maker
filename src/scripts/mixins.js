@@ -19,7 +19,7 @@ var swipeMixin = {
     }
   },
   mounted: function(){
-    swipe.init(document.querySelector('#result'), this.swipeHandler, this.moveHandler, this.touchHandler, this.endHandler, this.tapHandler, 10);
+    swipe.init(document.querySelector('#canvas'), this.touchHandler, this.moveHandler, this.endHandler, this.swipeHandler, this.tapHandler, 10);
   }
 }
 
