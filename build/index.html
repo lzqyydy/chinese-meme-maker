@@ -9,20 +9,29 @@
   <div id="app">
     <div class="section" id="view">
       <canvas id="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+      <canvas id="invisible" style="display: none"></canvas>
     </div>
     <div class="section" id="controller">
-      <span class="desc">padding:</span><input type="value" v-model="controller.padding">
-      <div><button @click="addBody">添加bodies</button></div>
-      <div><button @click="addAccessories">添加accessories</button></div>
-      <div><button @click="addLine">添加line</button></div>
-      <div><button @click="output">输出图片</button></div>
+      <div class="flex">
+        <div id="panel">
+          <div><span class="desc">padding:</span><input type="value" v-model="controller.padding"></div>
+          <div><span class="desc">显示外框</span><input type="checkbox" v-model="controller.displayBorder"></div>
+          <div><button @click="addBody">添加bodies</button></div>
+          <div><button @click="addAccessories">添加accessories</button></div>
+          <div><button @click="addLine">添加line</button></div>
+          <div><button @click="output">输出图片</button></div>
+        </div>
+        <div id="renderList">
+          <div class="order" v-for="el in order">{{el.type+el.index}}</div>
+        </div>
+      </div>
     </div>
     <div class="section" id="model">
-      <image-part v-for="(head, i) in heads" :name="'head'+i" :ref="'head'" :key="'head'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(face, i) in faces" :name="'face'+i" :ref="'face'" :key="'face'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(body, i) in bodies" :name="'body'+i" :ref="'body'" :key="'body'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(accessory, i) in accessories" :name="'accessory'" :ref="'accessory'+i" :key="'accessory'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
-      <text-part v-for="(line, i) in lines" :name="'line'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
+      <image-part v-for="(head, i) in heads" :name="'heads'+i" :ref="'head'" :key="'head'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
+      <image-part v-for="(face, i) in faces" :name="'faces'+i" :ref="'face'" :key="'face'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
+      <image-part v-for="(body, i) in bodies" :name="'bodies'+i" :ref="'body'" :key="'body'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
+      <image-part v-for="(accessory, i) in accessories" :name="'accessories'+i" :ref="'accessory'+i" :key="'accessory'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
+      <text-part v-for="(line, i) in lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
     </div>
     <modal v-if="controller.showOutput" @close="controller.showOutput = false">
       <h3 slot="header"></h3>
