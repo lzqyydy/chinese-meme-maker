@@ -4,6 +4,7 @@ var el_heads=[{
   height: 130,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 }];
 var el_faces=[{
@@ -12,6 +13,7 @@ var el_faces=[{
   height: 70,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/faces/0001.png',
@@ -19,6 +21,7 @@ var el_faces=[{
   height: 64,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/faces/0002.png',
@@ -26,6 +29,7 @@ var el_faces=[{
   height: 64,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 }];
 var el_bodies=[{
@@ -34,6 +38,7 @@ var el_bodies=[{
   height: 92,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/bodies/0001.png',
@@ -41,6 +46,7 @@ var el_bodies=[{
   height: 122,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/bodies/0002.png',
@@ -48,6 +54,7 @@ var el_bodies=[{
   height: 122,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/bodies/0003.png',
@@ -55,6 +62,7 @@ var el_bodies=[{
   height: 122,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/bodies/0004.png',
@@ -62,6 +70,7 @@ var el_bodies=[{
   height: 122,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 },{
   src: 'resources/bodies/0005.png',
@@ -69,6 +78,7 @@ var el_bodies=[{
   height: 122,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 }];
 var el_accessories=[{
@@ -77,6 +87,7 @@ var el_accessories=[{
   height: 64,
   x: 0,
   y: 0,
+  rotation: 0,
   mirror: false
 }];
 
