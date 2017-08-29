@@ -6,6 +6,78 @@ var el_heads=[{
   y: 0,
   rotation: 0,
   mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
+},{
+  src: 'resources/heads/0000.png',
+  width: 150,
+  height: 130,
+  x: 0,
+  y: 0,
+  rotation: 0,
+  mirror: false
 }];
 var el_faces=[{
   src: 'resources/faces/0000.png',

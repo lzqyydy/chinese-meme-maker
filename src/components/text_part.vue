@@ -1,7 +1,7 @@
 <template>
   <div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">
     <div>
-      <span class="title">{{name}}:</span><input type="text" v-model="data.context">
+      <span class="desc">{{name}}:</span><input type="text" v-model="data.context">
     </div>
     <div>
       <span class="desc">size:</span><input type="value" v-model="data.params.size">
@@ -172,11 +172,6 @@ export default {
 </script>
 
 <style type="stylus">
-.title{
-  display: inline-block;
-  width: var(--desc-width);
-  font-size: var(--desc-size);
-}
 .desc{
   display: inline-block;
   width: var(--desc-width);

@@ -1,7 +1,9 @@
 <template>
   <div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">
     <div>
-      <span class="title">{{name}}:</span>
+      <span class="desc">{{name}}:</span>
+    </div>
+    <div>
       <element-list :elements="elements" :selection="data.selection" @select="onselect"></element-list>
     </div>
     <div>
@@ -221,11 +223,6 @@ export default {
 </script>
 
 <style type="stylus">
-.title{
-  display: inline-block;
-  width: var(--desc-width);
-  font-size: var(--desc-size);
-}
 .desc{
   display: inline-block;
   width: var(--desc-width);
