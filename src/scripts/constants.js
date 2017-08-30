@@ -1,5 +1,5 @@
-const canvasWidth = 400;
-const canvasHeight = 300;
+const canvasWidth = 360;
+const canvasHeight = 270;
 
 export { canvasWidth, canvasHeight };
 

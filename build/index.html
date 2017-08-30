@@ -28,11 +28,13 @@
       </div>
     </div>
     <div class="section" id="model">
-      <image-part v-for="(head, i) in heads" :name="'heads'+i" :ref="'head'" :key="'head'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(face, i) in faces" :name="'faces'+i" :ref="'face'" :key="'face'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(body, i) in bodies" :name="'bodies'+i" :ref="'body'" :key="'body'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
-      <image-part v-for="(accessory, i) in accessories" :name="'accessories'+i" :ref="'accessory'+i" :key="'accessory'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
-      <text-part v-for="(line, i) in lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
+      <scroll-view class="container" :vertical="true" style="max-height: calc(100vh - 2 * var(--section-padding))">
+        <image-part v-for="(head, i) in heads" :name="'heads'+i" :ref="'heads'" :key="'heads'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
+        <image-part v-for="(face, i) in faces" :name="'faces'+i" :ref="'faces'" :key="'faces'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
+        <image-part v-for="(body, i) in bodies" :name="'bodies'+i" :ref="'bodies'" :key="'bodies'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
+        <image-part v-for="(accessory, i) in accessories" :name="'accessories'+i" :ref="'accessories'+i" :key="'accessories'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
+        <text-part v-for="(line, i) in lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
+      </scroll-view>
     </div>
     <modal v-if="controller.showOutput" @close="controller.showOutput = false">
       <h3 slot="header"></h3>

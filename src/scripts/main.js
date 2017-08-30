@@ -1,5 +1,7 @@
 import '../styles/main.css';
 
+import { canvasWidth, canvasHeight } from './constants.js'
+
 import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as Accessory, TextPart as Line } from './model.js';
 import { newDraw, newBorder } from './draw.js';
 import { el_heads, el_faces, el_bodies, el_accessories } from './data.js';
@@ -15,8 +17,8 @@ var app = new Vue({
   el: '#app',
   mixins: [swipeMixin],
   data: {
-    canvasWidth: 360,
-    canvasHeight: 270,
+    canvasWidth: canvasWidth,
+    canvasHeight: canvasHeight,
     elements: {
       heads: [],
       faces: [],

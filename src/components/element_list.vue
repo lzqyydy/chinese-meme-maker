@@ -41,8 +41,7 @@ export default {
   flex-basis: calc(var(--element-size) / 2);
 }*/
 .container{
-  width: calc(var(--element-size) * 6.2);
-  max-width: 100%;
+  max-width: calc(var(--element-size) * 6.2);
   white-space: nowrap;
   overflow: hidden;
 }

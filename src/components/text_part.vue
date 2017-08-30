@@ -1,17 +1,17 @@
 <template>
-  <div class="part" :id="name" @focus="onPartSelected" tabindex="0" @keydown="onkeydown">
+  <div class="part" :id="name" @mousedown="onPartSelected" @touchstart="onPartSelected" tabindex="0" @keydown="onkeydown">
     <div>
       <span class="desc">{{name}}:</span><input type="text" v-model="data.context">
     </div>
     <div>
-      <span class="desc">size:</span><input type="value" v-model="data.params.size">
+      <slider-input name="size" :min="0" :max="canvasHeight" :step="1" :value.sync="data.params.size"></slider-input>
     <div>
     </div>
-      <span class="desc">x:</span><input type="value" v-model="data.params.x">
-      <span class="desc">y:</span><input type="value" v-model="data.params.y">
+      <slider-input name="x" :min="-canvasWidth/2" :max="canvasWidth/2" :step="1" :value.sync="data.params.x"></slider-input>
+      <slider-input name="y" :min="-canvasHeight/2" :max="canvasHeight/2" :step="1" :value.sync="data.params.y"></slider-input>
     </div>
     <div>
-      <span class="desc">旋转:</span><input type="value" v-model="data.params.rotation">
+      <slider-input name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
       <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> 
     </div>
   </div>
@@ -19,7 +19,9 @@
 
 <script>
 // copied from offital Vue examples
+import { canvasWidth, canvasHeight } from '../scripts/constants.js'
 import { TextPart } from '../scripts/model.js'
+import s_i from '../components/slider_input.vue'
 export default {
   props: ['name'],
   data () {
@@ -164,9 +166,12 @@ export default {
       }
     },
     onPartSelected: function(e){
-      console.log('focused');
+      this.$el.focus();
       this.$emit('focused', this.name);
     }
+  },
+  components: {
+    'slider-input': s_i
   }
 }
 </script>
