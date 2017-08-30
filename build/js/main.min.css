@@ -1,0 +1,727 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+.modal-body {
+  margin: 20px 0;
+}
+.modal-body > * {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.modal-footer > * {
+  display: inline-block;
+}
+.modal-default-button {
+  float: right;
+}
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter {
+  opacity: 0;
+}
+.modal-leave-active {
+  opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.scrollView{
+  max-width: 100vw;
+  max-height: 100vh;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+/*.scrollContainer{
+  max-width: initial;
+  max-height: initial;
+}*/
+.scrollContainer.smoothing{
+  transition: 1.2s transform ease-out;
+}
+.scrollContainer.vertical{
+  display: block;
+}
+.scrollContainer.horizontal{
+  display: inline-block;
+}
+.scrollContainer.vertical > *{
+  display: block;
+}
+.scrollContainer.horizontal > *{
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.flex{
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 100%;
+}
+.inline{
+  display: inline-block;
+  vertical-align: middle;
+}
+.button{
+  flex-basis: calc(var(--element-size) / 2);
+}*/
+.container[data-v-496b96c1]{
+  max-width: calc(var(--element-size) * 6.2);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.element[data-v-496b96c1] {
+  max-width: var(--element-size);
+  max-height: var(--element-size);
+  border: 1px black;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.elm-selected[data-v-496b96c1] {
+  box-shadow: 0 0 5px #666;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.desc{
+  display: inline-block;
+  width: var(--desc-width);
+  font-size: var(--desc-size);
+  white-space: nowrap;
+}
+.checker{
+  width: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrapper[data-v-1df2282c]{
+  display: inline-block;
+}
+.desc[data-v-1df2282c]{
+  display: inline-block;
+  width: var(--desc-width);
+  font-size: var(--desc-size);
+  white-space: nowrap;
+}
+.checker[data-v-1df2282c]{
+  width: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.desc{
+  display: inline-block;
+  width: var(--desc-width);
+  font-size: var(--desc-size);
+  white-space: nowrap;
+}
+
