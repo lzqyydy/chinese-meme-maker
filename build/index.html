@@ -13,28 +13,43 @@
       <canvas id="invisible" style="display: none"></canvas>
     </div>
     <div class="section" id="controller">
-      <div class="flex">
+      <div>
         <div id="panel">
-          <div><span class="desc">padding:</span><input type="value" v-model="controller.padding"></div>
-          <div><span class="desc">显示外框</span><input type="checkbox" v-model="controller.displayBorder"></div>
-          <div><button @click="addBody">添加bodies</button></div>
-          <div><button @click="addAccessories">添加accessories</button></div>
-          <div><button @click="addLine">添加line</button></div>
-          <div><button @click="output">输出图片</button></div>
+          <div><span>padding:</span><input type="value" v-model="controller.padding"></div>
+          <div><span>显示外框</span><input type="checkbox" v-model="controller.displayBorder"></div>
+          <button @click="addBody">添加bodies</button>
+          <button @click="addAccessories">添加accessories</button>
+          <button @click="addLine">添加line</button>
+          <button @click="output">输出图片</button>
         </div>
         <div id="renderList">
           <div class="order" v-for="el in order">{{el.type+el.index}}</div>
         </div>
       </div>
     </div>
-    <div class="section" id="model">
+    <div class="section" id="models">
       <scroll-view class="container" :vertical="true" style="max-height: calc(100vh - 2 * var(--section-padding))">
-        <image-part v-for="(head, i) in heads" :name="'heads'+i" :ref="'heads'" :key="'heads'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
-        <image-part v-for="(face, i) in faces" :name="'faces'+i" :ref="'faces'" :key="'faces'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
-        <image-part v-for="(body, i) in bodies" :name="'bodies'+i" :ref="'bodies'" :key="'bodies'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
-        <image-part v-for="(accessory, i) in accessories" :name="'accessories'+i" :ref="'accessories'+i" :key="'accessories'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
-        <text-part v-for="(line, i) in lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
+        <folder name="heads">
+          <image-part v-for="(head, i) in heads" :name="'heads'+i" :ref="'heads'" :key="'heads'+i"  :elements="elements.heads" @changed="updateData" @focused="updateTarget"></image-part>
+        </folder>
+        <folder name="faces">
+          <image-part v-for="(face, i) in faces" :name="'faces'+i" :ref="'faces'" :key="'faces'+i"  :elements="elements.faces" @changed="updateData" @focused="updateTarget"></image-part>
+        </folder>
+        <folder name="bodies">
+          <image-part v-for="(body, i) in bodies" :name="'bodies'+i" :ref="'bodies'" :key="'bodies'+i" :elements="elements.bodies" @changed="updateData" @focused="updateTarget"></image-part>
+        </folder>
+        <folder name="accessories">
+          <image-part v-for="(accessory, i) in accessories" :name="'accessories'+i" :ref="'accessories'" :key="'accessories'+i" :elements="elements.accessories" @changed="updateData" @focused="updateTarget"></image-part>
+        </folder>
+        <folder name="lines">
+          <text-part v-for="(line, i) in lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateData" @focused="updateTarget"></text-part>
+        </folder>
       </scroll-view>
+    </div>
+    <div class="section" id="model">
+      <!-- why is key important? -->
+      <image-part v-if="activePart&&!activePart.startsWith('line')" :name="activePart" ref="mImage" :key="activePart" :elements="elements[activePart.slice(0,-1)]" @changed="updateData" @focused="updateTarget"></image-part>
+      <text-part v-if="activePart&&activePart.startsWith('line')" :name="activePart" ref="mText" :key="activePart" @changed="updateData" @focused="updateTarget"></text-part>
     </div>
     <modal v-if="controller.showOutput" @close="controller.showOutput = false">
       <h3 slot="header"></h3>

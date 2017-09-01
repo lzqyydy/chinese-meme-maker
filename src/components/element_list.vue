@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="button inline">left</div> -->
   <scroll-view class="container" :vertical="false">
-    <img class="element" v-for="(element, i) in elements" :class="{ 'elm-selected': selection==i }" :src="element.src" :data-index="i" @click.stop="onclick">
+    <img class="element" v-for="(element, i) in elements" :class="{ 'elm-selected': selection==i }" :src="element.src" :data-index="i" @click.stop="onclick" @touchstart="onclick">
   </scroll-view>
   <!-- <div class="button inline">right</div> -->
 </template>

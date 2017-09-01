@@ -125,6 +125,9 @@ var app = new Vue({
     Sortable.create(renderList, {
       group: 'renderList',
       animation: 100,
+      onChoose: (evt) => {
+        this.activePart = (evt.item.innerHTML);
+      },
       onEnd: (evt) => {
         this.order.swap(evt.oldIndex, evt.newIndex);
         this.redraw();
