@@ -209,6 +209,7 @@ export default {
       }
     },
     onselect: function(e){
+      console.log(this.name);
       this.data.selection = e.target;
       this.data.params.width = e.data.width;
       this.data.params.height = e.data.height;
@@ -220,6 +221,7 @@ export default {
       this.onPartSelected();
     },
     onPartSelected: function(e){
+      console.log(this.name);
       this.$el.focus();
       this.$emit('focused', this.name);
     }

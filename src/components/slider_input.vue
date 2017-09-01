@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper" @touchstart.stop="" @touchmove.stop="" @touchend.stop="" @touchcancel.stop="" @mousedown.stop="" @mousemove.stop="" @mouseup.stop="" @mouseleave.stop="" @keydown.prevent="">
-    <span class="desc">{{name}}</span><input type="range" :min="min" :max="max" :step="step" :value="value" @input="oninput"><input class="checker" type="value" :value="value" readonly>
+  <div class="slider-wrapper" @touchstart.stop="" @touchmove.stop="" @touchend.stop="" @touchcancel.stop="" @mousedown.stop="" @mousemove.stop="" @mouseup.stop="" @mouseleave.stop="" @keydown.prevent="">
+    <span class="slider-desc">{{name}}</span><input class="slider-bar" type="range" :min="min" :max="max" :step="step" :value="value" @input="oninput"><input class="slider-checker" type="value" :value="value" readonly>
   </div>
 </template>
 
@@ -23,16 +23,20 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
+.slider-wrapper{
   display: inline-block;
 }
-.desc{
+.slider-desc{
+  width: 25%;
   display: inline-block;
-  width: var(--desc-width);
   font-size: var(--desc-size);
-  white-space: nowrap;
 }
-.checker{
-  width: 35px;
+.slider-bar{
+  width: 60%;
+  box-sizing: border-box;
+}
+.slider-checker{
+  width: 15%;
+  box-sizing: border-box;
 }
 </style>
