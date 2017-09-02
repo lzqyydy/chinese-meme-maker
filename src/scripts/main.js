@@ -13,7 +13,10 @@ import * as C from './constants.js'
 
 import Sortable from './sortable.esm.js'
 
-var app = new Vue({
+import store from './store.js'
+
+
+const app = new Vue({
   el: '#app',
   mixins: [swipeMixin],
   data: {
