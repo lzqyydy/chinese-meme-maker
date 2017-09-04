@@ -7,15 +7,15 @@
       <element-list :elements="elements" :selection="data.selection" @select="onselect"></element-list>
     </div>
     <div>
-      <slider-input name="width" :min="0" :max="canvasWidth" :step="1" :value.sync="data.params.width"></slider-input>
-      <slider-input name="height" :min="0" :max="canvasHeight" :step="1" :value.sync="data.params.height"></slider-input>
+      <slider-input class="options" name="width" :min="0" :max="canvasWidth" :step="1" :value.sync="data.params.width"></slider-input>
+      <slider-input class="options" name="height" :min="0" :max="canvasHeight" :step="1" :value.sync="data.params.height"></slider-input>
     </div>
     <div>
-      <slider-input name="x" :min="-canvasWidth/2" :max="canvasWidth/2" :step="1" :value.sync="data.params.x"></slider-input>
-      <slider-input name="y" :min="-canvasHeight/2" :max="canvasHeight/2" :step="1" :value.sync="data.params.y"></slider-input>
+      <slider-input class="options" name="x" :min="-canvasWidth/2" :max="canvasWidth/2" :step="1" :value.sync="data.params.x"></slider-input>
+      <slider-input class="options" name="y" :min="-canvasHeight/2" :max="canvasHeight/2" :step="1" :value.sync="data.params.y"></slider-input>
     </div>
     <div>
-      <slider-input name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
+      <slider-input class="options" name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
       <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> 
     </div>
   </div>
@@ -25,7 +25,7 @@
 // copied from offital Vue examples
 import { canvasWidth, canvasHeight } from '../scripts/constants.js'
 import { ImagePart } from '../scripts/model.js'
-import s_i from '../components/slider_input.vue'
+import s_i from './slider_input.vue'
 export default {
   props: ['name','elements'],
   data () {
@@ -38,7 +38,13 @@ export default {
   watch: {
     'data.params.width': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'width', 
+          value: n
+        });
       }
       else{
         this.data.params.width = o;
@@ -46,7 +52,13 @@ export default {
     },
     'data.params.height': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'height', 
+          value: n
+        });
       }
       else{
         this.data.params.height = o;
@@ -54,7 +66,13 @@ export default {
     },
     'data.params.x': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'x', 
+          value: n
+        });
       }
       else{
         this.data.params.x = o;
@@ -62,7 +80,13 @@ export default {
     },
     'data.params.y': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'y', 
+          value: n
+        });
       }
       else{
         this.data.params.y = o;
@@ -70,14 +94,26 @@ export default {
     },
     'data.params.rotation': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'rotation', 
+          value: n
+        });
       }
       else{
         this.data.params.rotation = o;
       }
     },
     'data.params.mirror': function(n, o){
-      this.$emit('changed', this.name, this.data);
+      this.$emit('changed');
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'mirror', 
+        value: n
+      });
     }
   },
   methods: {
@@ -211,13 +247,54 @@ export default {
     onselect: function(e){
       console.log(this.name);
       this.data.selection = e.target;
+      this.$store.commit('select', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        value: e.target
+      });
       this.data.params.width = e.data.width;
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'width', 
+        value: e.data.width
+      });
       this.data.params.height = e.data.height;
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'height', 
+        value: e.data.height
+      });
       this.data.params.x = e.data.x;
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'x', 
+        value: e.data.x
+      });
       this.data.params.y = e.data.y;
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'y', 
+        value: e.data.y
+      });
       this.data.params.rotation = e.data.rotation;
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'rotation', 
+        value: e.data.rotation
+      });
       this.data.params.mirror = e.data.mirror;
-      this.$emit('changed', this.name, this.data);
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'mirror', 
+        value: e.data.mirror
+      });
+      // this.$emit('changed', this.name, this.data);
       this.onPartSelected();
     },
     onPartSelected: function(e){
@@ -239,7 +316,7 @@ export default {
   font-size: var(--desc-size);
   white-space: nowrap;
 }
-.checker{
-  width: 35px;
+.options{
+  width: 200px;
 }
 </style>

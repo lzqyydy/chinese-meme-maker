@@ -19,6 +19,7 @@ import store from './store.js'
 const app = new Vue({
   el: '#app',
   mixins: [swipeMixin],
+  store,
   data: {
     canvasWidth: canvasWidth,
     canvasHeight: canvasHeight,
@@ -28,11 +29,6 @@ const app = new Vue({
       bodies: [],
       accessories: []
     },
-    heads: [new Head()],
-    faces: [new Face()],
-    bodies: [],
-    accessories: [],
-    lines: [new Line()],
     order: [{type: 'heads', index: 0}, {type: 'faces', index: 0}, {type: 'lines', index: 0}],
     activePart: null,
     controller: {
@@ -44,52 +40,34 @@ const app = new Vue({
     }
   },
   methods: {
-    updateData: function(name, data){
-      if(name.startsWith('head')){
-        Vue.set(this.heads, 0, data)
-      }
-      if(name.startsWith('face')){
-        Vue.set(this.faces, 0, data)
-      }
-      if(name.startsWith('bod')){
-        var target = parseInt(name.slice('bodies'.length));
-        Vue.set(this.bodies, target, data)
-      }
-      if(name.startsWith('acc')){
-        var target = parseInt(name.slice('accessories'.length));
-        Vue.set(this.accessories, target, data)
-      }
-      if(name.startsWith('line')){
-        var target = parseInt(name.slice('lines'.length));
-        Vue.set(this.lines, target, data)
-      }
+    updateCanvas: function(name, data){
       this.redraw();
     },
     updateTarget: function(name){
       this.activePart = name;
     },
     addBody: function(){
-      if(this.bodies.length<=3){
-        this.bodies.push(new Body());
-        this.order.push({type: 'bodies', index: this.bodies.length-1});
+      if(this.$store.state.bodies.length<=3){
+        this.$store.commit('addBody');
+        this.order.push({type: 'bodies', index: this.$store.state.bodies.length-1});
       }
       else{
         return;
       }
     },
-    addAccessories: function(){
-      if(this.accessories.length<=3){
-        this.accessories.push(new Accessory());
-        this.order.push({type: 'accessories', index: this.accessories.length-1});
+    addAccessory: function(){
+      if(this.$store.state.accessories.length<=3){
+        this.$store.commit('addAccessory');
+        this.order.push({type: 'accessories', index: this.$store.state.accessories.length-1});
       }
       else{
         return;
       }
     },
     addLine: function(){
-      if(this.lines.length<=3){
-        this.lines.push(new Line());
-        this.order.push({type: 'lines', index: this.lines.length-1});
+      if(this.$store.state.lines.length<=3){
+        this.$store.commit('addLine');
+        this.order.push({type: 'lines', index: this.$store.state.lines.length-1});
       }
       else{
         return;
@@ -106,7 +84,7 @@ const app = new Vue({
     },
     redraw: function(){
       var drawList = this.order.map((v)=>{
-        return {type: v.type, index: v.index, data: this[v.type][v.index]}
+        return {type: v.type, index: v.index, data: this.$store.state[v.type][v.index]}
       })
       newDraw(drawList);
       this.controller.rect = newBorder(drawList, +this.controller.padding, this.controller.displayBorder);

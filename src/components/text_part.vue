@@ -1,17 +1,17 @@
 <template>
   <div class="part" :id="name" @mousedown="onPartSelected" @touchstart="onPartSelected" tabindex="0" @keydown="onkeydown">
     <div>
-      <span class="desc">{{name}}:</span><input type="text" v-model="data.context">
+      <text-input class="options" :name="name" :value.sync="data.context"></text-input>
     </div>
     <div>
-      <slider-input name="size" :min="0" :max="canvasHeight" :step="1" :value.sync="data.params.size"></slider-input>
+      <slider-input class="options" name="size" :min="0" :max="canvasHeight" :step="1" :value.sync="data.params.size"></slider-input>
     <div>
     </div>
-      <slider-input name="x" :min="-canvasWidth/2" :max="canvasWidth/2" :step="1" :value.sync="data.params.x"></slider-input>
-      <slider-input name="y" :min="-canvasHeight/2" :max="canvasHeight/2" :step="1" :value.sync="data.params.y"></slider-input>
+      <slider-input class="options" name="x" :min="-canvasWidth/2" :max="canvasWidth/2" :step="1" :value.sync="data.params.x"></slider-input>
+      <slider-input class="options" name="y" :min="-canvasHeight/2" :max="canvasHeight/2" :step="1" :value.sync="data.params.y"></slider-input>
     </div>
     <div>
-      <slider-input name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
+      <slider-input class="options" name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
       <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> 
     </div>
   </div>
@@ -21,7 +21,8 @@
 // copied from offital Vue examples
 import { canvasWidth, canvasHeight } from '../scripts/constants.js'
 import { TextPart } from '../scripts/model.js'
-import s_i from '../components/slider_input.vue'
+import t_i from './text_input.vue'
+import s_i from './slider_input.vue'
 export default {
   props: ['name'],
   data () {
@@ -31,11 +32,21 @@ export default {
   },
   watch: {
     'data.context': function(n, o){
-      this.$emit('changed', this.name, this.data);
+      this.$emit('changed');
+      this.$store.commit('contextChange', {
+        index: this.name.slice(-1), 
+        value: n
+      });
     },
     'data.params.size': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'size', 
+          value: n
+        });
       }
       else{
         this.data.params.width = o;
@@ -43,7 +54,13 @@ export default {
     },
     'data.params.x': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'x', 
+          value: n
+        });
       }
       else{
         this.data.params.x = o;
@@ -51,7 +68,13 @@ export default {
     },
     'data.params.y': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'y', 
+          value: n
+        });
       }
       else{
         this.data.params.y = o;
@@ -59,14 +82,26 @@ export default {
     },
     'data.params.rotation': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed', this.name, this.data);
+        this.$emit('changed');
+        this.$store.commit('setParam', {
+          category: this.name.slice(0,-1), 
+          index: this.name.slice(-1), 
+          param: 'rotation', 
+          value: n
+        });
       }
       else{
         this.data.params.rotation = o;
       }
     },
     'data.params.mirror': function(n, o){
-      this.$emit('changed', this.name, this.data);
+      this.$emit('changed');
+      this.$store.commit('setParam', {
+        category: this.name.slice(0,-1), 
+        index: this.name.slice(-1), 
+        param: 'mirror', 
+        value: n
+      });
     }
   },
   methods: {
@@ -171,16 +206,20 @@ export default {
     }
   },
   components: {
-    'slider-input': s_i
+    'slider-input': s_i,
+    'text-input': t_i
   }
 }
 </script>
 
-<style type="stylus">
+<style type="stylus" scoped>
 .desc{
   display: inline-block;
   width: var(--desc-width);
   font-size: var(--desc-size);
   white-space: nowrap;
+}
+.options{
+  width: 200px;
 }
 </style>

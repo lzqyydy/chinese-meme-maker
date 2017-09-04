@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-wrapper" @touchstart.stop="" @touchmove.stop="" @touchend.stop="" @touchcancel.stop="" @mousedown.stop="" @mousemove.stop="" @mouseup.stop="" @mouseleave.stop="" @keydown.prevent="">
+  <div class="slider-wrapper" @touchstart.stop="" @touchmove.stop="" @mousedown.stop="" @mousemove.stop="" @keydown.prevent="">
     <span class="slider-desc">{{name}}</span><input class="slider-bar" type="range" :min="min" :max="max" :step="step" :value="value" @input="oninput"><input class="slider-checker" type="value" :value="value" readonly>
   </div>
 </template>
@@ -16,8 +16,6 @@ export default {
       //important
       this.$emit('update:value', e.target.value);
     }
-  },
-  mounted(){
   }
 }
 </script>
