@@ -126,7 +126,12 @@
 
 
 
-.collapsed ~ *[data-v-10902746]{
+.folder-hint[data-v-3cc39333]{
+  width: 50%;
+  background-color: #ccc;
+  /*background: #F8BB44;*/
+}
+.folder-collapsed ~ *[data-v-3cc39333]{
   transition: height 0.5s ease-out;
   height: 0;
   overflow: hidden;
@@ -275,19 +280,19 @@
 .button{
   flex-basis: calc(var(--element-size) / 2);
 }*/
-.container[data-v-5353eaa4]{
+.container[data-v-496b96c1]{
   max-width: calc(var(--element-size) * 6.2);
   white-space: nowrap;
   overflow: hidden;
 }
-.element[data-v-5353eaa4] {
+.element[data-v-496b96c1] {
   max-width: var(--element-size);
   max-height: var(--element-size);
   border: 1px black;
   box-sizing: border-box;
   vertical-align: middle;
 }
-.elm-selected[data-v-5353eaa4] {
+.elm-selected[data-v-496b96c1] {
   box-shadow: 0 0 5px #666;
 }
 
@@ -526,54 +531,131 @@
 
 
 
-.desc{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.options[data-v-59375217]{
+  width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.slider-wrapper[data-v-1df2282c]{
   display: inline-block;
-  width: var(--desc-width);
-  font-size: var(--desc-size);
-  white-space: nowrap;
 }
-.checker{
-  width: 35px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.slider-wrapper[data-v-aa46c7ce]{
-  display: inline-block;
-}
-.slider-desc[data-v-aa46c7ce]{
+.slider-desc[data-v-1df2282c]{
   width: 25%;
   display: inline-block;
   font-size: var(--desc-size);
 }
-.slider-bar[data-v-aa46c7ce]{
+.slider-bar[data-v-1df2282c]{
   width: 60%;
   box-sizing: border-box;
 }
-.slider-checker[data-v-aa46c7ce]{
+.slider-checker[data-v-1df2282c]{
   width: 15%;
   box-sizing: border-box;
 }
@@ -757,10 +839,89 @@
 
 
 
-.desc{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.options[data-v-34d55035]{
+  width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.text-wrapper[data-v-3a070f78]{
   display: inline-block;
-  width: var(--desc-width);
+}
+.text-desc[data-v-3a070f78]{
+  width: 25%;
+  display: inline-block;
   font-size: var(--desc-size);
-  white-space: nowrap;
+}
+.text-input[data-v-3a070f78]{
+  width: 75%;
+  box-sizing: border-box;
 }
 
