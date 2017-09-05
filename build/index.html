@@ -28,23 +28,23 @@
       </div>
     </div>
     <div class="section" id="models">
-      <scroll-view class="container" :vertical="true" style="max-height: calc(100vh - 2 * var(--section-padding))">
-        <folder name="heads">
+      <!-- <scroll-view class="container" :vertical="true" style="max-height: calc(100vh - 2 * var(--section-padding))"> -->
+        <folder :name="`heads[${$store.state.heads.length}]`">
           <image-part v-for="(head, i) in $store.state.heads" :name="'heads'+i" :ref="'heads'" :key="'heads'+i"  :elements="elements.heads" @changed="updateCanvas" @focused="updateTarget"></image-part>
         </folder>
-        <folder name="faces">
+        <folder :name="`faces[${$store.state.faces.length}]`">
           <image-part v-for="(face, i) in $store.state.faces" :name="'faces'+i" :ref="'faces'" :key="'faces'+i"  :elements="elements.faces" @changed="updateCanvas" @focused="updateTarget"></image-part>
         </folder>
-        <folder name="bodies">
+        <folder :name="`bodies[${$store.state.bodies.length}]`">
           <image-part v-for="(body, i) in $store.state.bodies" :name="'bodies'+i" :ref="'bodies'" :key="'bodies'+i" :elements="elements.bodies" @changed="updateCanvas" @focused="updateTarget"></image-part>
         </folder>
-        <folder name="accessories">
+        <folder :name="`accessories[${$store.state.accessories.length}]`">
           <image-part v-for="(accessory, i) in $store.state.accessories" :name="'accessories'+i" :ref="'accessories'" :key="'accessories'+i" :elements="elements.accessories" @changed="updateCanvas" @focused="updateTarget"></image-part>
         </folder>
-        <folder name="lines">
+        <folder :name="`lines[${$store.state.lines.length}]`">
           <text-part v-for="(line, i) in $store.state.lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateCanvas" @focused="updateTarget"></text-part>
         </folder>
-      </scroll-view>
+      <!-- </scroll-view> -->
     </div>
     <div class="section" id="model">
       <!-- why is key important? -->

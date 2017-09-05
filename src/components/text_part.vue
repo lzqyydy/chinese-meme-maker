@@ -27,26 +27,28 @@ export default {
   props: ['name'],
   data () {
     return {
-      data: new TextPart()
+      data: new TextPart(),
+      canvasWidth: canvasWidth, 
+      canvasHeight: canvasHeight
     }
   },
   watch: {
     'data.context': function(n, o){
-      this.$emit('changed');
       this.$store.commit('contextChange', {
         index: this.name.slice(-1), 
         value: n
       });
+      this.$emit('changed');
     },
     'data.params.size': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'size', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.width = o;
@@ -54,13 +56,13 @@ export default {
     },
     'data.params.x': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'x', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.x = o;
@@ -68,13 +70,13 @@ export default {
     },
     'data.params.y': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'y', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.y = o;
@@ -208,18 +210,20 @@ export default {
   components: {
     'slider-input': s_i,
     'text-input': t_i
+  },
+  mounted(){
+    this.data.context = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].context;
+    this.data.params.size = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.size;
+    this.data.params.x = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.x;
+    this.data.params.y = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.y;
+    this.data.params.rotation = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.rotation;
+    this.data.params.mirror = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.mirror;
   }
 }
 </script>
 
 <style type="stylus" scoped>
-.desc{
-  display: inline-block;
-  width: var(--desc-width);
-  font-size: var(--desc-size);
-  white-space: nowrap;
-}
 .options{
-  width: 200px;
+  width: 50%;
 }
 </style>

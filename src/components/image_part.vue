@@ -16,7 +16,7 @@
     </div>
     <div>
       <slider-input class="options" name="rotation" :min="-180" :max="180" :step="1" :value.sync="data.params.rotation"></slider-input>
-      <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"> 
+      <span class="desc">镜像</span><input type="checkbox" v-model="data.params.mirror"><span class="desc">保持比例</span><input type="checkbox" v-model="keepAspect"> 
     </div>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default {
   data () {
     return {
       data: new ImagePart(),
+      keepAspect: true,
       canvasWidth: canvasWidth, 
       canvasHeight: canvasHeight
     }
@@ -38,13 +39,13 @@ export default {
   watch: {
     'data.params.width': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'width', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.width = o;
@@ -52,13 +53,13 @@ export default {
     },
     'data.params.height': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'height', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.height = o;
@@ -66,13 +67,13 @@ export default {
     },
     'data.params.x': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'x', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.x = o;
@@ -80,13 +81,13 @@ export default {
     },
     'data.params.y': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'y', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.y = o;
@@ -94,26 +95,26 @@ export default {
     },
     'data.params.rotation': function(n, o){
       if(!isNaN(n)){
-        this.$emit('changed');
         this.$store.commit('setParam', {
           category: this.name.slice(0,-1), 
           index: this.name.slice(-1), 
           param: 'rotation', 
           value: n
         });
+        this.$emit('changed');
       }
       else{
         this.data.params.rotation = o;
       }
     },
     'data.params.mirror': function(n, o){
-      this.$emit('changed');
       this.$store.commit('setParam', {
         category: this.name.slice(0,-1), 
         index: this.name.slice(-1), 
         param: 'mirror', 
         value: n
       });
+      this.$emit('changed');
     }
   },
   methods: {
@@ -245,7 +246,6 @@ export default {
       }
     },
     onselect: function(e){
-      console.log(this.name);
       this.data.selection = e.target;
       this.$store.commit('select', {
         category: this.name.slice(0,-1), 
@@ -298,25 +298,27 @@ export default {
       this.onPartSelected();
     },
     onPartSelected: function(e){
-      console.log(this.name);
       this.$el.focus();
       this.$emit('focused', this.name);
     }
   },
   components: {
     'slider-input': s_i
+  },
+  mounted(){
+    this.data.selection = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].selection;
+    this.data.params.width = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.width;
+    this.data.params.height = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.height;
+    this.data.params.x = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.x;
+    this.data.params.y = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.y;
+    this.data.params.rotation = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.rotation;
+    this.data.params.mirror = this.$store.state[this.name.slice(0,-1)][this.name.slice(-1)].params.mirror;
   }
 }
 </script>
 
-<style type="stylus">
-.desc{
-  display: inline-block;
-  width: var(--desc-width);
-  font-size: var(--desc-size);
-  white-space: nowrap;
-}
+<style type="stylus" scoped>
 .options{
-  width: 200px;
+  width: 50%;
 }
 </style>

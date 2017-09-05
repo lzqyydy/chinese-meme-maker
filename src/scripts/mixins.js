@@ -5,7 +5,7 @@ var swipeMixin = {
     swipeHandler: function(op, text){
       // console.log('op', op, 'text', text);
     },
-    moveHandler: function(dx, dy, mods){
+    moveHandler: function(dx, dy, vx, vy, mods){
       if(window.innerWidth>800){
         this.activePart&&this.$refs[this.activePart.slice(0,-1)][this.activePart.slice(-1)].ondrag(dx, dy, mods);
       }

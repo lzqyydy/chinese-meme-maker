@@ -45,6 +45,7 @@ const app = new Vue({
     },
     updateTarget: function(name){
       this.activePart = name;
+      this.redraw();
     },
     addBody: function(){
       if(this.$store.state.bodies.length<=3){
@@ -73,12 +74,57 @@ const app = new Vue({
         return;
       }
     },
+    clamp: function(x){
+      if(x<0){
+        return 0;
+      }
+      if(x>255){
+        return 255;
+      }
+      return x;
+    },
+    clampuv: function(x){
+      if(x<-128){
+        return -128;
+      }
+      if(x>127){
+        return 127;
+      }
+      return x;
+    },
     output: function(){
       var canvas = document.querySelector('#canvas');
       var inv = document.querySelector('#invisible');
+      canvas.crossOrigin = "Anonymous";
+      inv.crossOrigin = "Anonymous";
       inv.width = this.controller.rect.right-this.controller.rect.left+this.controller.padding*2;
       inv.height = this.controller.rect.bottom-this.controller.rect.top+this.controller.padding*2;
       inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.controller.padding, canvas.height/2+this.controller.rect.top-this.controller.padding, inv.width, inv.height, 0, 0, inv.width, inv.height);
+      
+
+      // var img = new Image();
+      for(let i = 0; i < 16; i++) {
+        var imageData = inv.getContext('2d').getImageData(0, 0, inv.width, inv.height);
+        var data = imageData.data;
+        for(let p = 0; p < data.length/4; ++p) {
+            const r = data[p*4  ];
+            const g = data[p*4+1];
+            const b = data[p*4+2];
+            const y = this.clamp  ((  77*r + 150*g +  29*b) >> 8);
+            const u = this.clampuv(((-43*r -  85*g + 128*b) >> 8) - 1);
+            const v = this.clampuv(((128*r - 107*g -  21*b) >> 8) - 1);
+            const r1 = this.clamp((65536*y           + 91881*v) >> 16);
+            const g1 = this.clamp((65536*y - 22553*u - 46802*v) >> 16);
+            const b1 = this.clamp((65536*y + 116130*u         ) >> 16);
+            data[p*4  ] = r1;
+            data[p*4+1] = g1;
+            data[p*4+2] = b1;
+        }
+        inv.getContext('2d').putImageData(imageData, 0, 0);
+        // img.src = inv.toDataURL("image/jpeg", 0.01);
+        // inv.getContext('2d').drawImage(img, 0, 0, inv.width, inv.height);
+      }
+
       this.controller.outputImg = document.querySelector('#invisible').toDataURL();
       this.controller.showOutput = true;
     },

@@ -30,7 +30,7 @@ export default {
   font-size: var(--desc-size);
 }
 .text-input{
-  width: 80%;
+  width: 75%;
   box-sizing: border-box;
 }
 </style>
