@@ -33,31 +33,31 @@ var newDraw = function(drawList){
 
 var borderValueCheck = function(rect, item, lineWidth){
   if(item instanceof TextPart){
-    if(!rect.top||rect.top>item.params.y-item.params.size/2){
-      rect.top = item.params.y-item.params.size/2;
+    if(!rect.top||rect.top > +item.params.y-item.params.size/2){
+      rect.top = +item.params.y-item.params.size/2;
     }
-    if(!rect.right||rect.right<item.params.x+lineWidth/2){
-      rect.right = item.params.x+lineWidth/2;
+    if(!rect.right||rect.right < +item.params.x+lineWidth/2){
+      rect.right = +item.params.x+lineWidth/2;
     }
-    if(!rect.bottom||rect.bottom<item.params.y+item.params.size/2){
-      rect.bottom = item.params.y+item.params.size/2;
+    if(!rect.bottom||rect.bottom < +item.params.y+item.params.size/2){
+      rect.bottom = +item.params.y+item.params.size/2;
     }
-    if(!rect.left||rect.left>item.params.x-lineWidth/2){
-      rect.left = item.params.x-lineWidth/2;
+    if(!rect.left||rect.left > +item.params.x-lineWidth/2){
+      rect.left = +item.params.x-lineWidth/2;
     }
   }
   if(item instanceof ImagePart){
-    if(!rect.top||rect.top>item.params.y-item.params.height/2){
-      rect.top = item.params.y-item.params.height/2;
+    if(!rect.top||rect.top > +item.params.y-item.params.height/2){
+      rect.top = +item.params.y-item.params.height/2;
     }
-    if(!rect.right||rect.right<item.params.x+item.params.width/2){
-      rect.right = item.params.x+item.params.width/2;
+    if(!rect.right||rect.right < +item.params.x+item.params.width/2){
+      rect.right = +item.params.x+item.params.width/2;
     }
-    if(!rect.bottom||rect.bottom<item.params.y+item.params.height/2){
-      rect.bottom = item.params.y+item.params.height/2;
+    if(!rect.bottom||rect.bottom < +item.params.y+item.params.height/2){
+      rect.bottom = +item.params.y+item.params.height/2;
     }
-    if(!rect.left||rect.left>item.params.x-item.params.width/2){
-      rect.left = item.params.x-item.params.width/2;
+    if(!rect.left||rect.left > +item.params.x-item.params.width/2){
+      rect.left = +item.params.x-item.params.width/2;
     }
   }
 }

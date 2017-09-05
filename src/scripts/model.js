@@ -23,7 +23,7 @@ var ImagePart = class ImagePart{
       }
     }
   }
-  setParam(w, h, x, y, r, m){
+  setParam(w, h, x, y, r, m, k){
     this.params.width = w;
     this.params.height = h;
     this.params.x = x;
@@ -64,11 +64,5 @@ var TextPart = class TextPart{
     this.params.mir = mir;
   }
 }
-
-var Head = ImagePart;
-var Fase = ImagePart;
-var Body = ImagePart;
-var Accessory = ImagePart;
-var Line = TextPart;
 
 export { ImagePart, TextPart };

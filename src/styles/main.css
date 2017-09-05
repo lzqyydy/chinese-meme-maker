@@ -66,9 +66,6 @@
 #model {
   display: none;
 }
-.slider-wrapper{
-  width: 200px;
-}
 @media (max-width: 800px) {
   :root{
     --section-padding: 20px;
@@ -116,9 +113,6 @@
     height: auto;
     box-sizing: border-box;
     padding: var(--section-padding);
-  }
-  .slider-wrapper{
-    width: calc(50vw - var(--section-padding));
   }
 }
 /*.flex {

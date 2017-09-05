@@ -7,6 +7,7 @@ function _init(target, touchCallback, moveCallback, endCallback, swipeCallback, 
   target.addEventListener('mousemove', handleTouchMove, {passive: false});
   target.addEventListener('mouseup', handleTouchEnd, {passive: false});
   target.addEventListener('mouseleave', handleTouchEnd, {passive: false});
+  target.addEventListener('wheel', handleWheel, {passive: false});
 
   var moveThreshold = _moveThreshold*target.getBoundingClientRect().width || 0.2*target.getBoundingClientRect().width;
   var tapThreshold = 15;
@@ -119,6 +120,12 @@ function _init(target, touchCallback, moveCallback, endCallback, swipeCallback, 
       }
     }
     clear();
+  }
+  function handleWheel(evt){
+    // use evt.wheelDeltaY to handle wheel
+    // on this computer unit is 120
+    // wheel += evt.wheelDeltaY;
+    // console.log('wheel', wheel);
   }
 }
 var swipe = {
