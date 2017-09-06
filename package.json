@@ -4,9 +4,7 @@
   "description": "none",
   "main": "index.js",
   "scripts": {
-    "dev-yashi": "rollup -c --environment PROJECT:yashi  --watch",
-    "dev-bubbles": "rollup -c --environment PROJECT:bubbles  --watch",
-    "dev-test": "rollup -c --environment PROJECT:test  --watch"
+    "dev-yashi": "rollup -c --watch",
   },
   "author": "",
   "license": "ISC",
