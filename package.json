@@ -4,7 +4,7 @@
   "description": "none",
   "main": "index.js",
   "scripts": {
-    "dev-yashi": "rollup -c --watch",
+    "dev": "rollup -c --watch"
   },
   "author": "",
   "license": "ISC",

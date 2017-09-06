@@ -1,8 +1,8 @@
-import m from '../../../lib/modal.vue';
+import m from '../../lib/modal.vue';
 
-import f from '../../../lib/folder.vue';
+import f from '../../lib/folder.vue';
 
-import s_v from '../../../lib/scroll_view.vue'
+import s_v from '../../lib/scroll_view.vue'
 
 import e_l from '../components/element_list.vue'
 

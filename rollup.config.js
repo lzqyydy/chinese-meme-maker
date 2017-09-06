@@ -26,7 +26,7 @@ const preprocessor = (content, id) => new Promise((resolve, reject) => {
 
 export default {
   entry: 'src/scripts/main.js',
-  dest: 'build/js/main.min.js',
+  dest: 'build/main.min.js',
   format: 'iife',
   sourceMap: 'inline',
   plugins: [

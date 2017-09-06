@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import s_v from '../../../lib/scroll_view.vue';
+import s_v from '../../lib/scroll_view.vue';
 
 export default {
   props: ['elements', 'selection'],
