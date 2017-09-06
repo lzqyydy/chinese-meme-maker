@@ -92,19 +92,14 @@ const app = new Vue({
       }
       return x;
     },
-    output: function(){
-      var canvas = document.querySelector('#canvas');
-      var inv = document.querySelector('#invisible');
-      canvas.crossOrigin = "Anonymous";
-      inv.crossOrigin = "Anonymous";
-      inv.width = this.controller.rect.right-this.controller.rect.left+this.controller.padding*2;
-      inv.height = this.controller.rect.bottom-this.controller.rect.top+this.controller.padding*2;
-      inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.controller.padding, canvas.height/2+this.controller.rect.top-this.controller.padding, inv.width, inv.height, 0, 0, inv.width, inv.height);
-      
-
-      // var img = new Image();
-      for(let i = 0; i < 16; i++) {
-        var imageData = inv.getContext('2d').getImageData(0, 0, inv.width, inv.height);
+    iter: function(canvas){
+      return new Promise(resolve =>{
+        var img = new Image();
+        img.onload = function(){
+          canvas.getContext('2d').drawImage(this, 0, 0, canvas.width, canvas.height);
+          resolve();
+        }
+        var imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
         var data = imageData.data;
         for(let p = 0; p < data.length/4; ++p) {
             const r = data[p*4  ];
@@ -120,9 +115,24 @@ const app = new Vue({
             data[p*4+1] = g1;
             data[p*4+2] = b1;
         }
-        inv.getContext('2d').putImageData(imageData, 0, 0);
-        // img.src = inv.toDataURL("image/jpeg", 0.01);
-        // inv.getContext('2d').drawImage(img, 0, 0, inv.width, inv.height);
+        canvas.getContext('2d').putImageData(imageData, 0, 0);
+        img.src = canvas.toDataURL("image/jpeg", 0.5);
+          
+      });
+    },
+    output: async function(){
+      var canvas = document.querySelector('#canvas');
+      var inv = document.querySelector('#invisible');
+      // canvas.crossOrigin = "Anonymous";
+      // inv.crossOrigin = "Anonymous";
+      inv.width = this.controller.rect.right-this.controller.rect.left+this.controller.padding*2;
+      inv.height = this.controller.rect.bottom-this.controller.rect.top+this.controller.padding*2;
+      inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.controller.padding, canvas.height/2+this.controller.rect.top-this.controller.padding, inv.width, inv.height, 0, 0, inv.width, inv.height);
+      
+
+      for(let i = 0; i < 16; i++) {
+        await this.iter(inv);
+        console.log(Date.now())
       }
 
       this.controller.outputImg = document.querySelector('#invisible').toDataURL();
