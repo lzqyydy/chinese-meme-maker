@@ -179,16 +179,9 @@ const app = new Vue({
         this.activePart = (evt.item.innerHTML);
       },
       onEnd: (evt) => {
-        this.order.swap(evt.oldIndex, evt.newIndex);
+        this.order.splice(evt.newIndex, 0, this.order.splice(evt.oldIndex, 1)[0])
         this.redraw();
       }
     });
   }
 });
-
-Array.prototype.swap = function (x,y) {
-  var b = this[x];
-  this[x] = this[y];
-  this[y] = b;
-  return this;
-}
