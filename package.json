@@ -1,0 +1,30 @@
+{
+  "name": "rollup-template-self",
+  "version": "1.0.0",
+  "description": "none",
+  "main": "index.js",
+  "scripts": {
+    "dev-yashi": "rollup -c --environment PROJECT:yashi  --watch",
+    "dev-bubbles": "rollup -c --environment PROJECT:bubbles  --watch",
+    "dev-test": "rollup -c --environment PROJECT:test  --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "cssnano": "^3.10.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-postcss": "^0.4.1",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-plugin-vue": "^2.4.1",
+    "rollup-watch": "^3.2.2"
+  },
+  "dependencies": {
+    "debug": "^2.6.3",
+    "stylus": "^0.54.5",
+    "vue": "^2.4.2"
+  }
+}
