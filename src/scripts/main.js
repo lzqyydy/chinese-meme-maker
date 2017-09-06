@@ -32,7 +32,7 @@ const app = new Vue({
     order: [{type: 'heads', index: 0}, {type: 'faces', index: 0}, {type: 'lines', index: 0}],
     activePart: null,
     controller: {
-      padding: 25,
+      padding: 10,
       displayBorder: false,
       rect: {top: 0, right: 0, bottom: 0, left: 0},
       outputImg: '',
