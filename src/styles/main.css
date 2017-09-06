@@ -58,6 +58,9 @@
   background-color: #ccc;
   border-radius: 3px; 
 }
+.order-highlight{
+  background-color: #fed7d7;
+}
 #models {
   width: calc(100vw - var(--view-width));
   box-sizing: border-box;

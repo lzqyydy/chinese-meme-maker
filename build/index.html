@@ -23,7 +23,7 @@
           <button @click="output">输出图片</button>
         </div>
         <div id="renderList">
-          <div class="order" v-for="el in order">{{el.type+el.index}}</div>
+          <div class="order" :class="{'order-highlight': activePart===el.type+el.index}" v-for="el in order">{{el.type+el.index}}</div>
         </div>
       </div>
     </div>
