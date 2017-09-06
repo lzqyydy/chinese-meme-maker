@@ -3,11 +3,11 @@ import { ImagePart as Head, ImagePart as Face, ImagePart as Body, ImagePart as A
 
 const data = new Vuex.Store({
   state: {
-    heads: [new Head()],
-    faces: [new Face()],
+    heads: [new Head({selection: 0, params:{width: 130, height: 115, x: 0, y: 0, rotation: 0, mirror: false}})],
+    faces: [new Face({selection: 0, params:{width: 60, height: 70, x: 0, y: 0, rotation: 0, mirror: false}})],
     bodies: [],
     accessories: [],
-    lines: [new Line()]
+    lines: [new Line({context: '吔屎啦你', params:{size: 18, x: 0, y: 75, rotation: 0, mirror: false}})]
   },
   mutations: {
     addHead(state){

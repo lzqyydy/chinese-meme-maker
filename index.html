@@ -42,7 +42,7 @@
           <image-part v-for="(accessory, i) in $store.state.accessories" :name="'accessories'+i" :ref="'accessories'" :key="'accessories'+i" :elements="elements.accessories" @changed="updateCanvas" @focused="updateTarget"></image-part>
         </folder>
         <folder :name="`lines[${$store.state.lines.length}]`">
-          <text-part v-for="(line, i) in $store.state.lines" :name="'lines'+i" :ref="'line'" :key="'line'+i" @changed="updateCanvas" @focused="updateTarget"></text-part>
+          <text-part v-for="(line, i) in $store.state.lines" :name="'lines'+i" :ref="'lines'" :key="'lines'+i" @changed="updateCanvas" @focused="updateTarget"></text-part>
         </folder>
       <!-- </scroll-view> -->
     </div>

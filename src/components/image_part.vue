@@ -294,7 +294,6 @@ export default {
         param: 'mirror', 
         value: e.data.mirror
       });
-      // this.$emit('changed', this.name, this.data);
       this.onPartSelected();
     },
     onPartSelected: function(e){

@@ -146,7 +146,7 @@ const app = new Vue({
       this.controller.rect = newBorder(drawList, +this.controller.padding, this.controller.displayBorder);
     }
   },
-  mounted: function(){
+  created: function(){
     for(var i=0;i<el_heads.length;i++){
       this.elements.heads.push(el_heads[i])
     }
@@ -159,6 +159,19 @@ const app = new Vue({
     for(var i=0;i<el_accessories.length;i++){
       this.elements.accessories.push(el_accessories[i])
     }
+  },
+  mounted: function(){
+    Promise.all([new Promise(resolve => {
+      this.$refs['heads'][0].$el.querySelector('.element').onload = () => {
+        resolve();
+      }
+    }), new Promise(resolve => {
+      this.$refs['faces'][0].$el.querySelector('.element').onload = () => {
+        resolve();
+      }
+    })]).then(() => {
+      this.redraw();
+    })
     Sortable.create(renderList, {
       group: 'renderList',
       animation: 100,

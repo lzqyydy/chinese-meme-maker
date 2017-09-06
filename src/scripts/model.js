@@ -3,12 +3,12 @@ var ImagePart = class ImagePart{
     if(data!==undefined){
       this.selection = data.selection;
       this.params = {
-        width: data.width,
-        height: data.height,
-        x: data.x,
-        y: data.y,
-        rotation: data.rotation,
-        mirror: data.mirror
+        width: data.params.width,
+        height: data.params.height,
+        x: data.params.x,
+        y: data.params.y,
+        rotation: data.params.rotation,
+        mirror: data.params.mirror
       }
     }
     else{
@@ -23,7 +23,8 @@ var ImagePart = class ImagePart{
       }
     }
   }
-  setParam(w, h, x, y, r, m, k){
+  set(s, w, h, x, y, r, m, k){
+    this.selection = s;
     this.params.width = w;
     this.params.height = h;
     this.params.x = x;
@@ -38,11 +39,11 @@ var TextPart = class TextPart{
     if(data!==undefined){
       this.context = data.context;
       this.params = {
-        size: data.size,
-        x: data.x,
-        y: data.y,
-        rotation: data.rotation,
-        mirror: data.mirror
+        size: data.params.size,
+        x: data.params.x,
+        y: data.params.y,
+        rotation: data.params.rotation,
+        mirror: data.params.mirror
       }
     }
     else{
@@ -56,11 +57,12 @@ var TextPart = class TextPart{
       }
     }
   }
-  setParam(con, s, x, y, mir){
-    this.context = con;
+  setParam(c, s, x, y, r, m){
+    this.context = c;
     this.params.size = s;
     this.params.x = x;
     this.params.y = y;
+    this.params.rotation = r;
     this.params.mir = mir;
   }
 }

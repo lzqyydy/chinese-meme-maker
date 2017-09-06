@@ -1,7 +1,7 @@
 var el_heads=[{
   src: 'resources/heads/0000.png',
-  width: 150,
-  height: 130,
+  width: 130,
+  height: 115,
   x: 0,
   y: 0,
   rotation: 0,
