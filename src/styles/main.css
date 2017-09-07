@@ -69,6 +69,9 @@
 #model {
   display: none;
 }
+.sortable-ghost{
+  opacity: 0.5;
+}
 @media (max-width: 800px) {
   :root{
     --section-padding: 20px;
@@ -123,9 +126,7 @@
   flex-wrap: wrap;
   align-items: stretch;
 }
-.sortable-ghost{
-  opacity: 0.5;
-}*/
+*/
 /*input:focus {
   box-shadow: 0 0 2px #eef;
 }

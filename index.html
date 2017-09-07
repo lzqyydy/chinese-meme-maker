@@ -25,6 +25,10 @@
         <div id="renderList">
           <div class="order" :class="{'order-highlight': activePart===el.type+el.index}" v-for="el in order" :key="el.type+el.index">{{el.type+el.index}}</div>
         </div>
+        <br>
+        <div id="trashBin">
+          <div class="order">🗑</div>
+        </div>
       </div>
     </div>
     <div class="section" id="models">

@@ -178,9 +178,20 @@ const app = new Vue({
       onChoose: (evt) => {
         this.activePart = (evt.item.innerHTML);
       },
-      onEnd: (evt) => {
+      onRemove: (evt) => {
+        this.order.splice(evt.oldIndex, 1);
+        this.redraw();
+      },
+      onUpdate: (evt) => {
         this.order.splice(evt.newIndex, 0, this.order.splice(evt.oldIndex, 1)[0])
         this.redraw();
+      }
+    });
+    Sortable.create(trashBin, {
+      group: {name: 'trashBin', put: 'renderList'},
+      animation: 100,
+      onAdd: (evt) => {
+        evt.item.remove();
       }
     });
   }
