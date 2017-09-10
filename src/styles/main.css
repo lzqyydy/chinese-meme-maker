@@ -121,6 +121,11 @@
     padding: var(--section-padding);
   }
 }
+#imcompitableCover{
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
 /*.flex {
   display: flex;
   flex-wrap: wrap;

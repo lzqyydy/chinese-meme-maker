@@ -15,6 +15,11 @@ import Sortable from './sortable.esm.js'
 
 import store from './store.js'
 
+import browser from './browser.js'
+
+if(browser.isFirefox||browser.isChrome||browser.isSafari){
+  document.querySelector('#imcompitableCover').style.display = 'none'
+}
 
 const app = new Vue({
   el: '#app',
