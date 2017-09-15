@@ -17,9 +17,14 @@ import store from './store.js'
 
 import browser from './browser.js'
 
-if(browser.isFirefox||browser.isChrome||browser.isSafari){
+// if(browser.isFirefox||browser.isChrome||browser.isSafari){
   document.querySelector('#imcompitableCover').style.display = 'none'
-}
+// }
+// else{
+//   alert(browser.isFirefox);
+//   alert(browser.isChrome);
+//   alert(browser.isSafari);
+// }
 
 const app = new Vue({
   el: '#app',
@@ -135,7 +140,7 @@ const app = new Vue({
       inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.controller.padding, canvas.height/2+this.controller.rect.top-this.controller.padding, inv.width, inv.height, 0, 0, inv.width, inv.height);
       
 
-      for(let i = 0; i < 16; i++) {
+      for(let i = 0; i < 6; i++) {
         await this.iter(inv);
         console.log(Date.now())
       }
