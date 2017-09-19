@@ -42,7 +42,6 @@ const app = new Vue({
     order: [{type: 'heads', index: 0}, {type: 'faces', index: 0}, {type: 'lines', index: 0}],
     activePart: null,
     controller: {
-      padding: 10,
       displayBorder: false,
       rect: {top: 0, right: 0, bottom: 0, left: 0},
       outputImg: '',
@@ -126,7 +125,7 @@ const app = new Vue({
             data[p*4+2] = b1;
         }
         canvas.getContext('2d').putImageData(imageData, 0, 0);
-        img.src = canvas.toDataURL("image/jpeg", 0.5);
+        img.src = canvas.toDataURL("image/jpeg", this.$store.state.output.quality/100);
           
       });
     },
@@ -135,14 +134,13 @@ const app = new Vue({
       var inv = document.querySelector('#invisible');
       // canvas.crossOrigin = "Anonymous";
       // inv.crossOrigin = "Anonymous";
-      inv.width = this.controller.rect.right-this.controller.rect.left+this.controller.padding*2;
-      inv.height = this.controller.rect.bottom-this.controller.rect.top+this.controller.padding*2;
-      inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.controller.padding, canvas.height/2+this.controller.rect.top-this.controller.padding, inv.width, inv.height, 0, 0, inv.width, inv.height);
+      inv.width = this.$store.state.output.scale*(this.controller.rect.right-this.controller.rect.left)+this.$store.state.output.padding*2;
+      inv.height = this.$store.state.output.scale*(this.controller.rect.bottom-this.controller.rect.top)+this.$store.state.output.padding*2;
+      inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.$store.state.output.padding, canvas.height/2+this.controller.rect.top-this.$store.state.output.padding, this.controller.rect.right-this.controller.rect.left+this.$store.state.output.padding*2, this.controller.rect.bottom-this.controller.rect.top+this.$store.state.output.padding*2, 0, 0, inv.width, inv.height);
       
 
-      for(let i = 0; i < 6; i++) {
+      for(let i = 0; i < this.$store.state.output.iteration; i++) {
         await this.iter(inv);
-        console.log(Date.now())
       }
 
       this.controller.outputImg = document.querySelector('#invisible').toDataURL();
@@ -153,7 +151,7 @@ const app = new Vue({
         return {type: v.type, index: v.index, data: this.$store.state[v.type][v.index]}
       })
       newDraw(drawList);
-      this.controller.rect = newBorder(drawList, +this.controller.padding, this.controller.displayBorder);
+      this.controller.rect = newBorder(drawList, +this.$store.state.padding, this.controller.displayBorder);
     }
   },
   created: function(){

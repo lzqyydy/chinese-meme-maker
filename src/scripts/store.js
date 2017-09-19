@@ -7,7 +7,13 @@ const data = new Vuex.Store({
     faces: [new Face({selection: 0, params:{width: 60, height: 70, x: 0, y: 0, rotation: 0, mirror: false}})],
     bodies: [],
     accessories: [],
-    lines: [new Line({context: '吔屎啦你', params:{size: 18, x: 0, y: 75, rotation: 0, mirror: false}})]
+    lines: [new Line({context: '吔屎啦你', params:{size: 18, x: 0, y: 75, rotation: 0, mirror: false}})],
+    output: {
+      padding: 10,
+      scale: 1,
+      quality: 50,
+      iteration: 6
+    }
   },
   mutations: {
     addHead(state){
@@ -33,6 +39,18 @@ const data = new Vuex.Store({
     },
     setParam(state, {category, index, param, value}){
       Vue.set(state[category][index].params, param, value);
+    },
+    updatePadding(state, padding){
+      state.output.padding = padding;
+    },
+    updateScale(state, scale){
+      state.output.scale = scale;
+    },
+    updateQuality(state, quality){
+      state.output.quality = quality;
+    },
+    updateIteration(state, iteration){
+      state.output.iteration = iteration;
     }
   }
 })

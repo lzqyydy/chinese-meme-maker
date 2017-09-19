@@ -15,7 +15,6 @@
     <div class="section" id="controller">
       <div>
         <div id="panel">
-          <div><span>padding:</span><input type="value" v-model="controller.padding"></div>
           <div><span>显示外框</span><input type="checkbox" v-model="controller.displayBorder"></div>
           <button @click="addBody">添加bodies</button>
           <button @click="addAccessory">添加accessories</button>
@@ -59,7 +58,7 @@
     </div>
     <modal v-if="controller.showOutput" @close="controller.showOutput = false">
       <h3 slot="header"></h3>
-      <img slot="body" :src="controller.outputImg">
+      <output-part slot="body" :img="controller.outputImg" @update="output"></output-part>
       <h3 slot="footer"></h3>
     </modal>
     <div id="imcompitableCover"></div>
