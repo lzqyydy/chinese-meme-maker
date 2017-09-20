@@ -43,8 +43,6 @@ const app = new Vue({
     activePart: null,
     controller: {
       displayBorder: false,
-      rect: {top: 0, right: 0, bottom: 0, left: 0},
-      outputImg: '',
       showOutput: false
     }
   },
@@ -83,67 +81,7 @@ const app = new Vue({
         return;
       }
     },
-    clamp: function(x){
-      if(x<0){
-        return 0;
-      }
-      if(x>255){
-        return 255;
-      }
-      return x;
-    },
-    clampuv: function(x){
-      if(x<-128){
-        return -128;
-      }
-      if(x>127){
-        return 127;
-      }
-      return x;
-    },
-    iter: function(canvas){
-      return new Promise(resolve =>{
-        var img = new Image();
-        img.onload = function(){
-          canvas.getContext('2d').drawImage(this, 0, 0, canvas.width, canvas.height);
-          resolve();
-        }
-        var imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
-        var data = imageData.data;
-        for(let p = 0; p < data.length/4; ++p) {
-            const r = data[p*4  ];
-            const g = data[p*4+1];
-            const b = data[p*4+2];
-            const y = this.clamp  ((  77*r + 150*g +  29*b) >> 8);
-            const u = this.clampuv(((-43*r -  85*g + 128*b) >> 8) - 1);
-            const v = this.clampuv(((128*r - 107*g -  21*b) >> 8) - 1);
-            const r1 = this.clamp((65536*y           + 91881*v) >> 16);
-            const g1 = this.clamp((65536*y - 22553*u - 46802*v) >> 16);
-            const b1 = this.clamp((65536*y + 116130*u         ) >> 16);
-            data[p*4  ] = r1;
-            data[p*4+1] = g1;
-            data[p*4+2] = b1;
-        }
-        canvas.getContext('2d').putImageData(imageData, 0, 0);
-        img.src = canvas.toDataURL("image/jpeg", this.$store.state.output.quality/100);
-          
-      });
-    },
-    output: async function(){
-      var canvas = document.querySelector('#canvas');
-      var inv = document.querySelector('#invisible');
-      // canvas.crossOrigin = "Anonymous";
-      // inv.crossOrigin = "Anonymous";
-      inv.width = this.$store.state.output.scale*(this.controller.rect.right-this.controller.rect.left)+this.$store.state.output.padding*2;
-      inv.height = this.$store.state.output.scale*(this.controller.rect.bottom-this.controller.rect.top)+this.$store.state.output.padding*2;
-      inv.getContext('2d').drawImage(canvas, canvas.width/2+this.controller.rect.left-this.$store.state.output.padding, canvas.height/2+this.controller.rect.top-this.$store.state.output.padding, this.controller.rect.right-this.controller.rect.left+this.$store.state.output.padding*2, this.controller.rect.bottom-this.controller.rect.top+this.$store.state.output.padding*2, 0, 0, inv.width, inv.height);
-      
-
-      for(let i = 0; i < this.$store.state.output.iteration; i++) {
-        await this.iter(inv);
-      }
-
-      this.controller.outputImg = document.querySelector('#invisible').toDataURL();
+    output: function(){
       this.controller.showOutput = true;
     },
     redraw: function(){
@@ -151,7 +89,7 @@ const app = new Vue({
         return {type: v.type, index: v.index, data: this.$store.state[v.type][v.index]}
       })
       newDraw(drawList);
-      this.controller.rect = newBorder(drawList, +this.$store.state.padding, this.controller.displayBorder);
+      this.$store.commit('updateRegion', newBorder(drawList, +this.$store.state.padding, this.controller.displayBorder));
     }
   },
   created: function(){

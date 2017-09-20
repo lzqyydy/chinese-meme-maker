@@ -10,6 +10,7 @@ const data = new Vuex.Store({
     lines: [new Line({context: '吔屎啦你', params:{size: 18, x: 0, y: 75, rotation: 0, mirror: false}})],
     output: {
       padding: 10,
+      region: {left:0, right:0, top:0, bottom:0},
       scale: 1,
       quality: 50,
       iteration: 6
@@ -43,6 +44,9 @@ const data = new Vuex.Store({
     updatePadding(state, padding){
       state.output.padding = padding;
     },
+    updateRegion(state, region){
+      state.output.region = region;
+    },
     updateScale(state, scale){
       state.output.scale = scale;
     },
@@ -51,7 +55,7 @@ const data = new Vuex.Store({
     },
     updateIteration(state, iteration){
       state.output.iteration = iteration;
-    }
+    },
   }
 })
 
