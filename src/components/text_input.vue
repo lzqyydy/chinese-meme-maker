@@ -1,5 +1,5 @@
 <template>
-  <div class="text-wrapper" @touchstart.stop="" @touchmove.stop="" @mousedown.stop="" @mousemove.stop="">
+  <div class="text-wrapper">
     <span class="text-desc">{{name}}</span><input class="text-input" type="text" :min="min" :max="max" :step="step" :value="value" @input="oninput">
   </div>
 </template>

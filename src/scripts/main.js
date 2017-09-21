@@ -108,11 +108,11 @@ const app = new Vue({
   },
   mounted: function(){
     Promise.all([new Promise(resolve => {
-      this.$refs['heads'][0].$el.querySelector('.element').onload = () => {
+      document.querySelector('#heads0').querySelector('.element').onload = () => {
         resolve();
       }
     }), new Promise(resolve => {
-      this.$refs['faces'][0].$el.querySelector('.element').onload = () => {
+      document.querySelector('#faces0').querySelector('.element').onload = () => {
         resolve();
       }
     })]).then(() => {
@@ -138,6 +138,7 @@ const app = new Vue({
       animation: 100,
       onAdd: (evt) => {
         evt.item.remove();
+        this.$store.commit('delete', {category:evt.item.innerText.slice(0,-1), index:evt.item.innerText.slice(-1)});
       }
     });
   }

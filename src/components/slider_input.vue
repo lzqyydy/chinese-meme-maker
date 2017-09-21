@@ -1,5 +1,5 @@
 <template>
-  <div class="slider-wrapper" @touchstart.stop="" @touchmove.stop="" @mousedown.stop="" @mousemove.stop="" @keydown.prevent="">
+  <div class="slider-wrapper">
     <span class="slider-desc">{{name}}</span><input class="slider-bar" type="range" :min="min" :max="max" :step="step" :value="value" @input="oninput"><input class="slider-checker" type="value" :value="value" readonly>
   </div>
 </template>

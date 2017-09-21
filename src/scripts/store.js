@@ -32,6 +32,9 @@ const data = new Vuex.Store({
     addLine(state){
       state.lines = [ ...state.lines, new Line() ]
     },
+    delete(state, {category, index}){
+      state[category].splice(index, 1);
+    },
     select(state, {category, index, value}){
       Vue.set(state[category][index], 'selection', value);
     },

@@ -68,7 +68,6 @@ export default {
       });
     },
     output: async function(){
-      console.log(this.currentIteration, this.$store.state.output.iteration)
       if(this.currentIteration < this.$store.state.output.iteration){
         this.currentIteration++;
 

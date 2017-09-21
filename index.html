@@ -31,27 +31,27 @@
     </div>
     <div class="section" id="models">
       <folder :name="`heads[${$store.state.heads.length}]`">
-        <image-part v-for="(head, i) in $store.state.heads" :name="'heads'+i" :ref="'heads'" :key="'heads'+i"  :elements="elements.heads" @changed="updateCanvas" @focused="updateTarget"></image-part>
+        <image-part v-for="(head, i) in $store.state.heads" :name="'heads'+i" :key="'heads'+i"  :elements="elements.heads" @changed="updateCanvas" @focused="updateTarget"></image-part>
       </folder>
       <folder :name="`faces[${$store.state.faces.length}]`">
-        <image-part v-for="(face, i) in $store.state.faces" :name="'faces'+i" :ref="'faces'" :key="'faces'+i"  :elements="elements.faces" @changed="updateCanvas" @focused="updateTarget"></image-part>
+        <image-part v-for="(face, i) in $store.state.faces" :name="'faces'+i" :key="'faces'+i"  :elements="elements.faces" @changed="updateCanvas" @focused="updateTarget"></image-part>
       </folder>
       <folder :name="`bodies[${$store.state.bodies.length}]`">
-        <image-part v-for="(body, i) in $store.state.bodies" :name="'bodies'+i" :ref="'bodies'" :key="'bodies'+i" :elements="elements.bodies" @changed="updateCanvas" @focused="updateTarget"></image-part>
+        <image-part v-for="(body, i) in $store.state.bodies" :name="'bodies'+i" :key="'bodies'+i" :elements="elements.bodies" @changed="updateCanvas" @focused="updateTarget"></image-part>
       </folder>
       <folder :name="`accessories[${$store.state.accessories.length}]`">
-        <image-part v-for="(accessory, i) in $store.state.accessories" :name="'accessories'+i" :ref="'accessories'" :key="'accessories'+i" :elements="elements.accessories" @changed="updateCanvas" @focused="updateTarget"></image-part>
+        <image-part v-for="(accessory, i) in $store.state.accessories" :name="'accessories'+i" :key="'accessories'+i" :elements="elements.accessories" @changed="updateCanvas" @focused="updateTarget"></image-part>
       </folder>
       <folder :name="`lines[${$store.state.lines.length}]`">
-        <text-part v-for="(line, i) in $store.state.lines" :name="'lines'+i" :ref="'lines'" :key="'lines'+i" @changed="updateCanvas" @focused="updateTarget"></text-part>
+        <text-part v-for="(line, i) in $store.state.lines" :name="'lines'+i" :key="'lines'+i" @changed="updateCanvas" @focused="updateTarget"></text-part>
       </folder>
     </div>
     <div class="section" id="model">
       <!-- why is key important? -->
       <!-- Answer: vue automatically reuse things caused corruption -->
       <!-- why can't show? -->
-      <image-part v-if="activePart&&!activePart.startsWith('line')" :name="activePart" ref="mImage" :key="activePart" :elements="elements[activePart.slice(0,-1)]" @changed="updateCanvas" @focused="updateTarget"></image-part>
-      <text-part v-if="activePart&&activePart.startsWith('line')" :name="activePart" ref="mText" :key="activePart" @changed="updateCanvas" @focused="updateTarget"></text-part>
+      <image-part v-if="activePart&&!activePart.startsWith('line')" :name="activePart" :key="activePart" :elements="elements[activePart.slice(0,-1)]" @changed="updateCanvas" @focused="updateTarget"></image-part>
+      <text-part v-if="activePart&&activePart.startsWith('line')" :name="activePart" :key="activePart" @changed="updateCanvas" @focused="updateTarget"></text-part>
     </div>
     <modal v-if="controller.showOutput" @close="controller.showOutput = false">
       <h3 slot="header"></h3>
